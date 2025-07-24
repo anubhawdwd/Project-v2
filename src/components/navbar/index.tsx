@@ -3,7 +3,12 @@ import React from "react";
 import { Container } from "../container";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useMotionValueEvent, useScroll } from "motion/react";
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useTransform,
+} from "motion/react";
 
 export const Navbar = () => {
   const navItems = [
@@ -18,8 +23,12 @@ export const Navbar = () => {
   const [scrolled, setScrolled] = React.useState<boolean>(false);
 
   const { scrollY } = useScroll();
+
+  const y = useTransform(scrollY, [0, 100], [0, 10]);
+  const width = useTransform(scrollY, [0, 100], ["60%", "40%"]);
+
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 50) {
+    if (latest > 20) {
       setScrolled(true);
     } else {
       setScrolled(false);
@@ -28,21 +37,23 @@ export const Navbar = () => {
   return (
     <Container>
       <motion.nav
-        animate={{
+        style={{
           boxShadow: scrolled ? "var(--shadow-aceternity)" : "none",
-          width: scrolled ? "50%" : "100%",
-          y: scrolled ? 10 : 0,
+          width: width,
+          y,
         }}
         transition={{ duration: 0.3, ease: "linear" }}
-        className="fixed inset-x-0 top-0 mx-auto flex max-w-4xl items-center justify-between rounded-4xl bg-white px-3 py-2 dark:bg-neutral-900"
+        className="fixed inset-x-0 top-0 z-1 mx-auto flex max-w-4xl items-center justify-between rounded-4xl bg-white px-3 py-2 dark:bg-neutral-900"
       >
-        <Image
-          src="/avatar.jpg"
-          alt="Anubhaw's Avatar"
-          width="100"
-          height="100"
-          className="h-10 w-10 rounded-full"
-        />
+        <Link href="/">
+          <Image
+            src="/avatar.jpg"
+            alt="Anubhaw's Avatar"
+            width="100"
+            height="100"
+            className="h-10 w-10 rounded-full"
+          />
+        </Link>
         <div className="flex items-center">
           {navItems.map((item, id) => (
             <Link
