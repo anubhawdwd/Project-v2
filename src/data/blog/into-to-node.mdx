@@ -1,0 +1,102 @@
+---
+title: "Introduction to Node.js"
+date: "2025-08-24"
+tags: ["Node.js", "JavaScript", "Backend"]
+description: "A beginner-friendly introduction to Node.js—what it is, why it matters, and how you can start building with it."
+---
+
+If you’ve been working with **JavaScript** on the frontend, you’ve probably wondered:  
+_"Can I use JavaScript outside the browser?"_  
+The answer is **yes** — thanks to **Node.js**.
+
+---
+
+## 🚀 What is Node.js?
+
+Node.js is an **open-source, cross-platform runtime environment** that lets you run JavaScript code **outside the browser**.  
+It’s built on **Google’s V8 engine** (the same engine powering Chrome), making it fast and efficient.
+
+Key points:
+
+- Runs JavaScript on the **server-side**
+- Event-driven and **non-blocking I/O** (handles thousands of requests efficiently)
+- Huge ecosystem of packages via **npm**
+
+---
+
+## 🔑 Why Use Node.js?
+
+1. **Single Language Everywhere**  
+   Use JavaScript for both **frontend** and **backend** — less context switching.
+
+2. **Performance**  
+   Non-blocking architecture makes it great for APIs, chat apps, and real-time features.
+
+3. **npm Ecosystem**  
+   Access to millions of libraries — from authentication to file handling.
+
+---
+
+## 🛠 Simple Example
+
+Here’s a minimal HTTP server using Node.js:
+
+```js
+// Import Node's built-in http module
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader("Content-Type", "text/plain");
+  res.end("Hello, Node.js!");
+});
+
+server.listen(3000, () => {
+  console.log("Server running at http://localhost:3000/");
+});
+```
+
+Run this with:
+
+```js
+node server.js
+```
+
+Visit http://localhost:3000
+and you’ll see:
+Hello, Node.js!
+
+## 📦 Installing Node.js
+
+Download from nodejs.org
+
+Check versions with:
+
+```js
+node - v;
+npm - v;
+```
+
+I recommend using nvm
+to manage Node versions.
+
+### ⚡ Common Use Cases
+
+- REST APIs & GraphQL servers
+
+- Real-time apps (chats, notifications)
+
+- CLI tools
+
+- Static file servers
+
+- Backend for SPAs and mobile apps
+
+### 🎯 Final Thoughts
+
+Node.js isn’t just “JavaScript on the server.”
+It’s a powerful platform that changed how developers build scalable, real-time applications.
+
+If you’re already comfortable with JavaScript, learning Node.js is a natural next step to becoming a full-stack developer. 🚀
+
+---
