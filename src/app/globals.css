@@ -16,3 +16,33 @@
   --color-primary: var(--color-neutral-100);
   --color-secondary: var(--color-neutral-300);
 }
+
+/* Minimal code block styling - won't interfere */
+figure[data-rehype-pretty-code-figure] {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+[data-rehype-pretty-code-figure] pre {
+  position: relative;
+  overflow-x: auto;
+}
+
+/* Optional: Scrollbar styling for code blocks */
+pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: #374151;
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 4px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
