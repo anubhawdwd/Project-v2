@@ -1,6 +1,7 @@
 "use client";
 import { Container } from "@/components/container";
-import { Link } from "next-view-transitions";
+// import { Link } from "next-view-transitions";
+import Link from "next/link";
 import { formatDate } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useState } from "react";
