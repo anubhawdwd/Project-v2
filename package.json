@@ -22,7 +22,6 @@
     "motion": "^12.23.5",
     "next": "15.3.5",
     "next-mdx-remote": "^5.0.0",
-    "next-view-transitions": "^0.3.4",
     "puppeteer-core": "^24.17.0",
     "react": "^19.0.0",
     "react-confetti": "^6.4.0",

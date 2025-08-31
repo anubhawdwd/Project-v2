@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
-import { ViewTransitions } from "next-view-transitions";
+// import { ViewTransitions } from "next-view-transitions";
+import PageTransition from "@/components/page-transition";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,15 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ViewTransitions>
-      <html lang="en">
-        <body
-          className={`${inter.className} bg-neutral-100 antialiased dark:bg-neutral-700`}
-        >
-          <Navbar />
-          {children}
-        </body>
-      </html>
-    </ViewTransitions>
+    <html lang="en">
+      <body
+        className={`${inter.className} bg-neutral-100 antialiased dark:bg-neutral-700`}
+      >
+        <Navbar />
+        <PageTransition>{children}</PageTransition>
+      </body>
+    </html>
   );
 }
