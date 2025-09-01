@@ -1,13 +1,13 @@
 export const avatarData = [
   {
     src: "/avatar/avatar1.jpg",
-    mood: "Professional",
-    name: "Anubhaw",
+    mood: "Casual",
+    name: "Anubhav",
     message: "Ready for business—and new ideas!",
   },
   {
     src: "/avatar/avatar2.jpg",
-    mood: "Casual",
+    mood: "Party",
     name: "Anubhaw",
     message: "Let’s keep things chill and creative. ☕️",
   },
@@ -18,8 +18,8 @@ export const avatarData = [
     message: "Adventures in code and the world.",
   },
   {
-    src: "/avatar/avatar4.jpg",
-    mood: "Fun",
+    src: "/avatar/avatar4.webp",
+    mood: "Good Mood",
     name: "Anubhav",
     message: "Coding with a smile. Let's add some memes!",
   },
