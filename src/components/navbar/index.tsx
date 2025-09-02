@@ -251,7 +251,7 @@ export function Navbar() {
 
   // Responsive width and y transforms
   const y = useTransform(scrollY, [0, 80], [0, 8]);
-  const desktopWidth = useTransform(scrollY, [0, 80], ["60%", "45%"]);
+  const desktopWidth = useTransform(scrollY, [0, 80], ["55%", "35%"]);
   const mobileWidth = useTransform(scrollY, [0, 80], ["95%", "90%"]);
 
   useMotionValueEvent(scrollY, "change", (v) => setScrolled(v > 20));
@@ -265,7 +265,7 @@ export function Navbar() {
           transition={{ duration: 0.28, ease: "easeOut" }}
           className={[
             "pointer-events-auto mx-auto max-w-5xl",
-            "rounded-[28px] bg-white/85 px-3 py-2 backdrop-blur-md",
+            "rounded-[28px] bg-gray-200/85 px-3 py-2 backdrop-blur-md",
             "dark:bg-neutral-900/85",
             scrolled ? "shadow-[0_10px_30px_rgba(0,0,0,0.08)]" : "shadow-none",
           ].join(" ")}

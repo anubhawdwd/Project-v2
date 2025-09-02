@@ -19,39 +19,6 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "lms-modernization",
-    title: "LMS Platform Modernization",
-    subtitle: "Enterprise Learning Management System",
-    description:
-      "Leading modernization of LMS platform with Angular & ASP.NET for enhanced mobile performance.",
-    longDescription:
-      "Spearheaded the complete modernization of a legacy Learning Management System, implementing mobile-first design principles and high-performance architecture. Led a development team to deliver a 25% performance improvement on mobile/tablet devices while enhancing content delivery security across backend and cloud layers.",
-    image:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1600&auto=format&fit=crop&q=60",
-    technologies: [
-      "Angular",
-      "ASP.NET Core",
-      "TypeScript",
-      "SQL",
-      "Azure",
-      "Docker",
-    ],
-    status: "completed",
-    category: "web-app",
-    links: {
-      // Add your actual links here
-      demo: "#",
-    },
-    features: [
-      "25% performance improvement on mobile/tablet",
-      "10x faster Quiz API (2000ms → 210ms)",
-      "Enhanced security across backend and cloud layers",
-      "Mobile-first responsive design",
-      "Real-time collaboration features",
-    ],
-    year: "2024",
-  },
-  {
     id: "excalidraw-clone",
     title: "Excalidraw Clone",
     subtitle: "Collaborative Online Whiteboard",
@@ -86,74 +53,6 @@ export const projects: Project[] = [
     year: "2024",
   },
   {
-    id: "client-dashboard-suite",
-    title: "Client Dashboard Suite",
-    subtitle: "Custom Business Dashboards",
-    description:
-      "Developed custom business websites and dashboards using React.js, Next.js, Node.js, and MongoDB.",
-    longDescription:
-      "Created a comprehensive suite of custom dashboards and business websites for various clients during freelance period. Delivered tailored admin functionality and content management systems designed specifically for non-technical clients, resulting in significant organic traffic growth.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format&fit=crop&q=60",
-    technologies: [
-      "React.js",
-      "Next.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Tailwind CSS",
-    ],
-    status: "completed",
-    category: "dashboard",
-    links: {
-      // Add portfolio or case study link
-      demo: "#",
-    },
-    features: [
-      "200%+ increase in clients' organic traffic",
-      "Custom admin functionality",
-      "Content management tailored for non-technical users",
-      "API integrations with third-party services",
-      "Responsive design across all devices",
-      "SEO optimization and accessibility",
-    ],
-    year: "2021-2024",
-  },
-  {
-    id: "enterprise-spa-suite",
-    title: "Enterprise SPA Suite",
-    subtitle: "Insurance & Construction Sector Apps",
-    description:
-      "Built single page applications in React.js for enterprise Insurance and Construction sector clients.",
-    longDescription:
-      "Developed multiple single-page applications for enterprise clients in the Insurance and Construction sectors at NTT DATA. Focused on creating responsive, user-friendly interfaces that reduced UI bugs and improved user experience through streamlined frontend logic and design collaboration.",
-    image:
-      "https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1600&auto=format&fit=crop&q=60",
-    technologies: [
-      "React.js",
-      "JavaScript",
-      "HTML5",
-      "CSS3",
-      "REST APIs",
-      "Git",
-    ],
-    status: "completed",
-    category: "web-app",
-    links: {
-      // These might be confidential, so keep as demo
-      demo: "#",
-    },
-    features: [
-      "Reduced UI bugs and bounce rate significantly",
-      "Streamlined frontend logic for better UX",
-      "Responsive design implementation",
-      "Cross-browser compatibility",
-      "Performance optimization",
-      "Reduced production issues by 10%",
-    ],
-    year: "2019-2021",
-  },
-  {
     id: "portfolio-website",
     title: "Portfolio Website v2",
     subtitle: "Personal Portfolio & Blog",
@@ -171,7 +70,7 @@ export const projects: Project[] = [
       "MDX",
       "Vercel",
     ],
-    status: "in-progress",
+    status: "completed",
     category: "web-app",
     links: {
       live: "https://anubhawdwivedi.com",
@@ -223,7 +122,7 @@ export const projects: Project[] = [
 export const categories = [
   { id: "all", label: "All Projects" },
   { id: "web-app", label: "Web Applications" },
-  { id: "dashboard", label: "Dashboards" },
-  { id: "api", label: "APIs" },
+  // { id: "dashboard", label: "Dashboards" },
+  // { id: "api", label: "APIs" },
   { id: "other", label: "Other" },
 ];
