@@ -7,11 +7,11 @@ import {
   FiMapPin,
   FiLinkedin,
   FiGithub,
-  FiTwitter,
   FiSend,
   FiCheck,
   FiAlertCircle,
 } from "react-icons/fi";
+import { FaXTwitter } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa";
 import { Container } from "@/components/container";
 
@@ -33,7 +33,7 @@ const contactMethods = [
     label: "Email",
     value: "anubhawdwivedi@gmail.com",
     href: "mailto:anubhawdwivedi@gmail.com",
-    description: "Drop me a line anytime",
+    description: "Drop me a mail anytime",
   },
   {
     icon: FaWhatsapp,
@@ -72,9 +72,9 @@ const socialLinks = [
     color: "hover:text-gray-600",
   },
   {
-    icon: FiTwitter,
-    label: "Twitter",
-    href: "#", // Add your Twitter if you have one
+    icon: FaXTwitter,
+    label: "X",
+    href: "https://x.com/anubhawdwd", // Add your Twitter if you have one
     color: "hover:text-blue-400",
   },
 ];
@@ -278,7 +278,7 @@ export default function ContactClient() {
                     onChange={handleChange}
                     required
                     className="focus:ring-primary w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-transparent focus:ring-2 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
-                    placeholder="John Doe"
+                    placeholder="Anubhaw Dwivedi"
                   />
                 </div>
                 <div>
@@ -296,7 +296,7 @@ export default function ContactClient() {
                     onChange={handleChange}
                     required
                     className="focus:ring-primary w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-transparent focus:ring-2 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
-                    placeholder="john@example.com"
+                    placeholder="yourEmailid@domain.com"
                   />
                 </div>
               </div>
