@@ -2,7 +2,7 @@ export const avatarData = [
   {
     src: "/avatar/avatar1.jpg",
     mood: "Casual",
-    name: "Anubhav",
+    name: "Anubhaw",
     message: "Ready for business—and new ideas!",
   },
   {
@@ -20,7 +20,7 @@ export const avatarData = [
   {
     src: "/avatar/avatar4.webp",
     mood: "Good Mood",
-    name: "Anubhav",
+    name: "Anubhaw",
     message: "Coding with a smile. Let's add some memes!",
   },
 ];
