@@ -19,27 +19,28 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "excalidraw-clone",
-    title: "Excalidraw Clone",
-    subtitle: "Collaborative Online Whiteboard",
+    id: "HRMS-Platform",
+    title: "Employee Management Platform",
+    subtitle: "Onboarding, Attendance and Leaves",
     description:
-      "Building a collaborative online whiteboard with React.js, focusing on drawing tools and real-time collaboration.",
+      "Build Employee management platform which enables employers to onboard employees, registering Location based attendance, Leave application and approval, Company Hierarchy",
     longDescription:
-      "Currently developing a comprehensive whiteboard application inspired by Excalidraw, featuring advanced drawing tools, real-time collaboration capabilities, and a modern, intuitive user interface. The project emphasizes performance optimization and seamless user experience across devices.",
+      "Build Employee management platform which enables employers to onboard employees, registering Location based attendance that too within defined radius, Leave application and approval, Company Hierarchy. Who is reporting whom can easily be viewed here. Hr can manage employees easily. Frontend was build in react and backend in Express. Used Prisma Orm for PostgreSql Database",
     image:
       "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1600&auto=format&fit=crop&q=60",
     technologies: [
       "React.js",
       "TypeScript",
-      "Socket.io",
-      "Canvas API",
       "Node.js",
-      "WebRTC",
+      "Express",
+      "Prisma ORM",
+      "Postgresql",
+      "Docker-Container",
     ],
     status: "in-progress",
     category: "web-app",
     links: {
-      github: "https://github.com/anubhawdwd", // Add your actual GitHub link
+      github: "https://github.com/anubhawdwd/hrms-be",
       demo: "#",
     },
     features: [
@@ -50,7 +51,7 @@ export const projects: Project[] = [
       "Undo/Redo functionality",
       "Layer management system",
     ],
-    year: "2024",
+    year: "2026",
   },
   {
     id: "portfolio-website",
@@ -84,39 +85,39 @@ export const projects: Project[] = [
       "Dark/light mode support",
       "Responsive animations and micro-interactions",
     ],
-    year: "2024",
+    year: "2026",
   },
-  {
-    id: "upcoming-project",
-    title: "AI-Powered Code Assistant",
-    subtitle: "Next-Generation Developer Tool",
-    description:
-      "Planning to build an AI-powered code assistant tool to help developers with code generation and optimization.",
-    longDescription:
-      "An ambitious upcoming project to create an intelligent code assistant that leverages AI to help developers write better code, suggest optimizations, and automate repetitive tasks. The tool will focus on modern JavaScript frameworks and will include features like code review assistance and automated testing suggestions.",
-    image:
-      "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&auto=format&fit=crop&q=60",
-    technologies: [
-      "Next.js",
-      "AI/ML",
-      "TypeScript",
-      "Python",
-      "OpenAI API",
-      "Electron",
-    ],
-    status: "planned",
-    category: "other",
-    links: {},
-    features: [
-      "AI-powered code generation",
-      "Intelligent code optimization suggestions",
-      "Automated testing assistance",
-      "Multi-language support",
-      "IDE integration",
-      "Real-time collaboration features",
-    ],
-    year: "2025",
-  },
+  // {
+  //   id: "upcoming-project",
+  //   title: "AI-Powered Code Assistant",
+  //   subtitle: "Next-Generation Developer Tool",
+  //   description:
+  //     "Planning to build an AI-powered code assistant tool to help developers with code generation and optimization.",
+  //   longDescription:
+  //     "An ambitious upcoming project to create an intelligent code assistant that leverages AI to help developers write better code, suggest optimizations, and automate repetitive tasks. The tool will focus on modern JavaScript frameworks and will include features like code review assistance and automated testing suggestions.",
+  //   image:
+  //     "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&auto=format&fit=crop&q=60",
+  //   technologies: [
+  //     "Next.js",
+  //     "AI/ML",
+  //     "TypeScript",
+  //     "Python",
+  //     "OpenAI API",
+  //     "Electron",
+  //   ],
+  //   status: "planned",
+  //   category: "other",
+  //   links: {},
+  //   features: [
+  //     "AI-powered code generation",
+  //     "Intelligent code optimization suggestions",
+  //     "Automated testing assistance",
+  //     "Multi-language support",
+  //     "IDE integration",
+  //     "Real-time collaboration features",
+  //   ],
+  //   year: "2026",
+  // },
 ];
 
 export const categories = [
