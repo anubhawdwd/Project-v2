@@ -1,4 +1,3 @@
-import { Container } from "@/components/container";
 import { getAllBlogs } from "../utils/mdx";
 import BlogsPageClient from "./BlogsPageClient";
 

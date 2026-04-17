@@ -3,7 +3,6 @@ import { Container } from "@/components/container";
 // import { Link } from "next-view-transitions";
 import Link from "next/link";
 import { formatDate } from "@/lib/utils";
-import { motion } from "framer-motion";
 import { useState } from "react";
 import {
   FiClock,
@@ -11,16 +10,25 @@ import {
   FiArrowRight,
   FiSearch,
   FiTag,
+  FiLoader,
 } from "react-icons/fi";
-import Image from "next/image";
+
+type Blog = {
+  slug: string;
+  title?: string;
+  description?: string;
+  date?: string;
+  tags?: string[];
+};
 
 interface BlogPageProps {
-  allBlogs: any[]; // You can create a proper Blog type later
+  allBlogs: Blog[];
 }
 
 export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [openingSlug, setOpeningSlug] = useState<string | null>(null);
 
   // Get unique tags from all blogs
   const allTags = Array.from(
@@ -54,12 +62,7 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
     <div className="flex min-h-screen items-start justify-start">
       <Container>
         {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
-        >
+        <div className="mb-12 text-center">
           <h1 className="text-primary mb-4 text-3xl font-bold tracking-tight md:text-5xl">
             My Blog 📝
           </h1>
@@ -88,15 +91,10 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
               <div className="text-secondary text-sm">Years Experience</div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Search and Filter Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-8 space-y-4"
-        >
+        <div className="mb-8 space-y-4">
           {/* Search Bar */}
           <div className="relative mx-auto max-w-md">
             <FiSearch
@@ -141,15 +139,10 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
               ))}
             </div>
           )}
-        </motion.div>
+        </div>
 
         {/* Blog Grid */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="grid gap-6 md:gap-8"
-        >
+        <div className="grid gap-6 md:gap-8">
           {filteredBlogs.length === 0 ? (
             <div className="py-16 text-center">
               <div className="mb-4 text-6xl">📝</div>
@@ -161,15 +154,15 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
               </p>
             </div>
           ) : (
-            filteredBlogs.map((blog, index) => (
-              <motion.article
+            filteredBlogs.map((blog) => (
+              <article
                 key={blog.slug}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="group"
               >
-                <Link href={`/blog/${blog.slug}`}>
+                <Link
+                  href={`/blog/${blog.slug}`}
+                  onClick={() => setOpeningSlug(blog.slug)}
+                >
                   <div className="hover:border-primary/50 rounded-xl border border-neutral-200 bg-white p-6 transition-all duration-300 group-hover:scale-[1.02] hover:shadow-xl dark:border-neutral-700 dark:bg-neutral-900">
                     {/* Blog Content */}
                     <div className="space-y-3">
@@ -187,10 +180,17 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
                             {getReadTime(blog.description || "")} min read
                           </div>
                         </div>
-                        <FiArrowRight
-                          size={16}
-                          className="text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                        />
+                        {openingSlug === blog.slug ? (
+                          <span className="text-primary flex items-center gap-1 text-xs font-medium">
+                            <FiLoader className="animate-spin" size={14} />
+                            Opening...
+                          </span>
+                        ) : (
+                          <FiArrowRight
+                            size={16}
+                            className="text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                          />
+                        )}
                       </div>
 
                       {/* Title */}
@@ -224,19 +224,14 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
                     </div>
                   </div>
                 </Link>
-              </motion.article>
+              </article>
             ))
           )}
-        </motion.div>
+        </div>
 
         {/* Call to Action */}
         {filteredBlogs.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-16 rounded-xl bg-neutral-50 p-8 text-center dark:bg-neutral-800"
-          >
+          <div className="mt-16 rounded-xl bg-neutral-50 p-8 text-center dark:bg-neutral-800">
             <h3 className="mb-2 text-xl font-semibold text-neutral-900 dark:text-neutral-100">
               Enjoying the content?
             </h3>
@@ -257,7 +252,7 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
                 About Me
               </Link>
             </div>
-          </motion.div>
+          </div>
         )}
       </Container>
     </div>

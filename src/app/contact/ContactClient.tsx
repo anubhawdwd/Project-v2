@@ -69,13 +69,13 @@ const socialLinks = [
     icon: FiGithub,
     label: "GitHub",
     href: "https://github.com/anubhawdwd",
-    color: "hover:text-gray-600",
+    color: "hover:text-blue-600",
   },
   {
     icon: FaXTwitter,
     label: "X",
-    href: "https://x.com/anubhawdwd", // Add your Twitter if you have one
-    color: "hover:text-blue-400",
+    href: "https://x.com/anubhawdwd",
+    color: "hover:text-blue-600",
   },
 ];
 
@@ -174,7 +174,7 @@ export default function ContactClient() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="mb-6 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
+            <h2 className="mb-4 text-2xl font-bold text-neutral-900 dark:text-neutral-100">
               Get in Touch
             </h2>
 
@@ -203,51 +203,8 @@ export default function ContactClient() {
                   </div>
                 </motion.a>
               ))}
-            </div>
 
-            {/* Social Links */}
-            <div>
-              <h3 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
-                Follow Me
-              </h3>
-              <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-                    className={`rounded-lg bg-neutral-100 p-3 transition-colors dark:bg-neutral-800 ${social.color} hover:scale-105`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <social.icon size={20} />
-                  </motion.a>
-                ))}
-              </div>
             </div>
-
-            {/* Availability Status */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mt-8 rounded-lg border border-green-200 bg-green-50 p-4 dark:border-green-800 dark:bg-green-900/20"
-            >
-              <div className="flex items-center space-x-2">
-                <div className="h-3 w-3 animate-pulse rounded-full bg-green-500"></div>
-                <span className="font-semibold text-green-800 dark:text-green-300">
-                  Available for Work
-                </span>
-              </div>
-              <p className="mt-1 text-sm text-green-700 dark:text-green-400">
-                Currently accepting new projects and collaboration
-                opportunities.
-              </p>
-            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
@@ -345,11 +302,10 @@ export default function ContactClient() {
               <motion.button
                 type="submit"
                 disabled={!isFormValid || status.type === "loading"}
-                className={`flex w-full items-center justify-center space-x-2 rounded-lg px-6 py-3 font-semibold transition-all duration-200 ${
-                  isFormValid && status.type !== "loading"
+                className={`flex w-full items-center justify-center space-x-2 rounded-lg px-6 py-3 font-semibold transition-all duration-200 ${isFormValid && status.type !== "loading"
                     ? "bg-primary hover:bg-primary/90 text-white shadow-lg hover:scale-[1.02]"
                     : "cursor-not-allowed bg-neutral-300 text-neutral-500 dark:bg-neutral-700 dark:text-neutral-400"
-                }`}
+                  }`}
                 whileTap={{ scale: 0.98 }}
               >
                 {status.type === "loading" ? (
@@ -373,11 +329,10 @@ export default function ContactClient() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`mt-4 flex items-start space-x-3 rounded-lg p-4 ${
-                    status.type === "success"
+                  className={`mt-4 flex items-start space-x-3 rounded-lg p-4 ${status.type === "success"
                       ? "border border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20"
                       : "border border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20"
-                  }`}
+                    }`}
                 >
                   {status.type === "success" ? (
                     <FiCheck
@@ -391,11 +346,10 @@ export default function ContactClient() {
                     />
                   )}
                   <p
-                    className={`text-sm ${
-                      status.type === "success"
+                    className={`text-sm ${status.type === "success"
                         ? "text-green-800 dark:text-green-300"
                         : "text-red-800 dark:text-red-300"
-                    }`}
+                      }`}
                   >
                     {status.message}
                   </p>
@@ -405,57 +359,35 @@ export default function ContactClient() {
           </motion.div>
         </div>
 
-        {/* FAQ Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16"
-        >
-          <h2 className="mb-8 text-center text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-            Frequently Asked Questions
-          </h2>
+        {/* Social Links */}
+        <div className="flex items-center justify-center">
+          <div className="flex flex-col items-center text-center">
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {[
-              {
-                question: "What's your typical response time?",
-                answer:
-                  "I usually respond to emails and messages within 24 hours, often much sooner during business hours.",
-              },
-              {
-                question: "Do you work with international clients?",
-                answer:
-                  "Absolutely! I work with clients globally and am comfortable with remote collaboration across different time zones.",
-              },
-              {
-                question: "What technologies do you specialize in?",
-                answer:
-                  "I specialize in React.js, Next.js, Node.js, TypeScript, and modern web technologies. Check out my projects page for more details.",
-              },
-              {
-                question: "Are you available for full-time opportunities?",
-                answer:
-                  "Yes, I'm open to discussing both full-time positions and freelance projects. Let's chat about what works best for your needs.",
-              },
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.6 + index * 0.1 }}
-                className="rounded-lg bg-neutral-50 p-6 dark:bg-neutral-800"
-              >
-                <h3 className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
-                  {faq.question}
-                </h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                  {faq.answer}
-                </p>
-              </motion.div>
-            ))}
+            <h4 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
+              Follow Me
+            </h4>
+
+            <div className="flex space-x-4 justify-center">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+                  className={`rounded-lg bg-neutral-100 p-3 transition-colors dark:bg-neutral-800 ${social.color} hover:scale-105`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <social.icon size={20} />
+                </motion.a>
+              ))}
+            </div>
+
           </div>
-        </motion.div>
+        </div>
       </Container>
     </>
   );

@@ -2,33 +2,13 @@
 title: I made Boilerplate for express prisma psql with Docker which you can re-use.
 date: 2026-02-13
 author: Anubhaw
-tags: [Node, Express, Prisma, Docker, Postgresql, Boilerplate]
+tags: [Boilerplate Template]
 description: Boilerplate for Node, express, Prisma ORM and Postgress via Docker.
-image: /images/node-express-prisma-psql-boilerplate.jpg
 ---
 
 # 🚀 Complete Guide: Node.js + Express + Prisma + PostgreSQL (Docker) Boilerplate
 
-## 📋 Table of Contents
-
-1. [Project Overview](#project-overview)
-2. [Prerequisites](#prerequisites)
-3. [Project Initialization](#1-initializing-node-project-with-typescript-and-express)
-4. [Express Server Setup](#2-creating-express-endpoint-for-testing)
-5. [PostgreSQL Setup with Docker](#3-installing-postgresql-via-docker)
-6. [Prisma ORM Integration](#4-initialize-prisma-orm-and-create-database)
-7. [Database Schema Design](#5-define-your-data-model-schema-file)
-8. [Database Migrations](#6-create-and-apply-your-first-migration)
-9. [Prisma Client Setup](#7-instantiate-prisma-client)
-10. [Writing Database Queries](#8-writing-first-query)
-11. [Database Management](#9-check-your-created-db-via-adminer)
-12. [Troubleshooting](#troubleshooting)
-13. [Best Practices](#best-practices)
-14. [Quick Reference Commands](#quick-reference-commands)
-
----
-
-## 🎯 Project Overview
+## 🎯 Project Overview 
 
 This comprehensive guide walks you through setting up a production-ready **Node.js** backend application with:
 
@@ -43,19 +23,19 @@ This comprehensive guide walks you through setting up a production-ready **Node.
 
 ```
 ┌─────────────────────────────────────┐
-│   Express.js (REST API Server)      │
+│   Express.js (REST API Server)                            |
 ├─────────────────────────────────────┤
-│   Prisma Client (ORM Layer)         │
+│   Prisma Client (ORM Layer)                              |
 ├─────────────────────────────────────┤
-│   @prisma/adapter-pg (Adapter)      │
+│   @prisma/adapter-pg (Adapter)                      |
 ├─────────────────────────────────────┤
-│   PostgreSQL (Docker Container)     │
+│   PostgreSQL (Docker Container)                      |   
 └─────────────────────────────────────┘
 ```
 
 ---
 
-## ✅ Prerequisites
+## ✅ Prerequisites 
 
 Before starting, ensure you have:
 
@@ -67,9 +47,9 @@ Before starting, ensure you have:
 
 ---
 
-## 1. Initializing Node Project with TypeScript and Express
+## 📦 Project Initialization
 
-### 📦 Step 1.1: Initialize Node.js Project
+### Step 1: Initialize Node.js Project
 
 ```bash
 npm init -y
@@ -82,7 +62,7 @@ npm init -y
 
 ---
 
-### 📦 Step 1.2: Install TypeScript Dependencies
+### Step 2: Install TypeScript Dependencies
 
 ```bash
 npm i -D typescript @types/node tsx
@@ -96,7 +76,7 @@ npm i -D typescript @types/node tsx
 
 ---
 
-### 📦 Step 1.3: Initialize TypeScript Configuration
+### Step 3: Initialize TypeScript Configuration
 
 ```bash
 npx tsc --init
@@ -109,7 +89,7 @@ npx tsc --init
 
 ---
 
-### 📦 Step 1.4: Install Express.js
+### Step 4: Install Express.js
 
 ```bash
 npm i express
@@ -125,7 +105,7 @@ npm i dotenv
 
 ---
 
-### ⚙️ Step 1.5: Configure ES Modules (ESM)
+### Step 5: Configure ES Modules (ESM)
 
 **In `package.json`, add:**
 
@@ -143,42 +123,33 @@ npm i dotenv
 
 ---
 
-### ⚙️ Step 1.6: Configure TypeScript Compiler
+### Step 6: Configure TypeScript Compiler
 
 **In `tsconfig.json`, update the following:**
 
 ```json
 {
   "compilerOptions": {
-    // File Layout
-    "rootDir": "./src", // Source files location
-    "outDir": "./dist", // Compiled JavaScript output
-
-    // Environment Settings
-    "module": "nodenext", // Use Node.js ESM resolution
-    "target": "esnext", // Compile to latest JS features
-    "lib": ["esnext"], // Include latest JS library definitions
-    "types": ["node"], // Include Node.js type definitions
-
-    // Other Outputs
-    "sourceMap": true, // Generate .map files for debugging
-    "declaration": true, // Generate .d.ts declaration files
-    "declarationMap": true, // Generate declaration source maps
-
-    // Stricter Type Checking
-    "noUncheckedIndexedAccess": true, // Safer array/object access
-    "exactOptionalPropertyTypes": true, // Strict optional properties
-
-    // Recommended Options
-    "strict": true, // Enable all strict checks
-    "verbatimModuleSyntax": true, // Preserve import/export syntax
-    "isolatedModules": true, // Ensure each file can be transpiled separately
-    "noUncheckedSideEffectImports": true, // Warn about unused imports
-    "moduleDetection": "force", // Treat all files as modules
-    "skipLibCheck": true // Skip type checking of .d.ts files
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "module": "nodenext",
+    "target": "esnext",
+    "lib": ["esnext"],
+    "types": ["node"],
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "strict": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "noUncheckedSideEffectImports": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
   },
-  "include": ["src"], // Only compile files in src/
-  "exclude": ["prisma.config.ts"] // Exclude Prisma config from compilation
+  "include": ["src"],
+  "exclude": ["prisma.config.ts"]
 }
 ```
 
@@ -191,9 +162,9 @@ npm i dotenv
 
 ---
 
-## 2. Creating Express Endpoint for Testing
+## 🖥️ Express Server Setup 
 
-### 📁 Step 2.1: Create Project Structure
+### Step 1: Create Project Structure
 
 ```bash
 mkdir src
@@ -213,7 +184,7 @@ project-root/
 
 ---
 
-### 💻 Step 2.2: Create Express Server
+### Step 2: Create Express Server
 
 **File: `./src/index.ts`**
 
@@ -241,7 +212,7 @@ app.listen("3003", () => console.log("endpoint started at Port 3003"));
 
 ---
 
-### ⚙️ Step 2.3: Configure Development Script
+### Step 3: Configure Development Script
 
 **In `package.json`, add to `scripts` section:**
 
@@ -261,7 +232,7 @@ app.listen("3003", () => console.log("endpoint started at Port 3003"));
 
 ---
 
-### 🧪 Step 2.4: Run Development Server
+### Step 4: Run Development Server
 
 ```bash
 npm run dev
@@ -285,9 +256,9 @@ http://localhost:3003/check
 
 ---
 
-## 3. Installing PostgreSQL via Docker
+## 🐳 PostgreSQL Setup with Docker 
 
-### 🐳 Step 3.1: Create Docker Compose Configuration
+### Step 1: Create Docker Compose Configuration
 
 **File: `docker-compose.yml` (create in project root)**
 
@@ -337,7 +308,7 @@ volumes:
 
 ---
 
-### 🔐 Step 3.2: Create Environment Variables
+### Step 2: Create Environment Variables
 
 **File: `.env` (create in project root)**
 
@@ -364,7 +335,7 @@ postgresql://[USER]:[PASSWORD]@[HOST]:[PORT]/[DATABASE]
 
 ---
 
-### 🚀 Step 3.3: Start Docker Containers
+### Step 3: Start Docker Containers
 
 ```bash
 docker compose up -d
@@ -387,7 +358,7 @@ docker compose up -d
 
 ---
 
-### ✅ Step 3.4: Verify Database Connection
+### Step 4: Verify Database Connection
 
 **Option 1: Using Docker CLI**
 
@@ -429,7 +400,9 @@ hrms-db=#
 
 ---
 
-### 📦 Step 3.5: Install Prisma Dependencies
+## ⚙️ Prisma ORM Setup 
+
+### Step 1: Install Prisma Dependencies
 
 ```bash
 npm i -D prisma @types/node @types/pg
@@ -467,10 +440,9 @@ npm i @prisma/client @prisma/adapter-pg pg dotenv
 
 ---
 
-### 🔧 Step 3.6: Initialize Prisma
+### Step 2: Initialize Prisma
 
 ```bash
-npx prisma
 npx prisma init
 ```
 
@@ -493,7 +465,7 @@ project-root/
 
 ---
 
-### ⚙️ Step 3.7: Configure Prisma (prisma.config.ts)
+### Step 3: Configure Prisma (`prisma.config.ts`)
 
 **File: `prisma.config.ts` (auto-generated)**
 
@@ -523,70 +495,9 @@ export default defineConfig({
 - `migrations.path` - Where migration files are stored
 - `datasource.url` - Database connection string from environment
 
-**Error handling:**
-
-- Validates `DATABASE_URL` exists before proceeding
-- Prevents runtime errors from missing configuration
-
 ---
 
-## 4. Initialize Prisma ORM and Create Database
-
-### 🎯 What is Prisma ORM?
-
-Prisma is a **next-generation ORM** that provides:
-
-- Type-safe database queries
-- Auto-generated TypeScript types
-- Database migrations management
-- Intuitive data modeling
-
----
-
-### 📋 Step 4.1: Prisma CLI Overview
-
-```bash
-npx prisma
-```
-
-**Available commands:**
-
-```
-init       Set up Prisma for your app
-generate   Generate Prisma Client
-migrate    Manage database migrations
-studio     Open Prisma Studio (database GUI)
-db         Manage your database schema
-format     Format your schema
-```
-
----
-
-### 🚀 Step 4.2: Initialize Prisma Project
-
-```bash
-npx prisma init
-```
-
-**What this command does:**
-
-1. **Creates `prisma/schema.prisma`:**
-   - Defines database connection
-   - Contains data models (tables)
-   - Configures Prisma Client generation
-
-2. **Creates `.env` file:**
-   - Stores `DATABASE_URL`
-   - Keeps credentials secure
-
-3. **Creates `prisma.config.ts`:**
-   - TypeScript configuration for Prisma
-   - Defines migration paths
-   - Loads environment variables
-
----
-
-### 📝 Step 4.3: Understanding Generated Files
+### Step 4: Understanding the Generated Files
 
 **`prisma/schema.prisma` (initial state):**
 
@@ -601,12 +512,6 @@ datasource db {
 }
 ```
 
-**`.env` (initial state):**
-
-```env
-DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb"
-```
-
 **Update `.env` with your credentials:**
 
 ```env
@@ -615,9 +520,9 @@ DATABASE_URL="postgresql://phi_hrms:phiAT1234@localhost:5432/hrms-db"
 
 ---
 
-## 5. Define Your Data Model (Schema File)
+## 🗄️ Database Schema Design 
 
-### 📐 Step 5.1: Update Prisma Schema
+### Step 1: Update Prisma Schema
 
 **File: `prisma/schema.prisma`**
 
@@ -650,9 +555,9 @@ model Post {
 
 ---
 
-### 📚 Schema Syntax Breakdown
+### Step 2: Schema Syntax Breakdown
 
-#### **Generator Block**
+#### Generator Block
 
 ```prisma
 generator client {
@@ -674,7 +579,7 @@ generator client {
 
 ---
 
-#### **Datasource Block**
+#### Datasource Block
 
 ```prisma
 datasource db {
@@ -682,18 +587,11 @@ datasource db {
 }
 ```
 
-**Supported providers:**
-
-- `postgresql`
-- `mysql`
-- `sqlite`
-- `sqlserver`
-- `mongodb`
-- `cockroachdb`
+**Supported providers:** `postgresql`, `mysql`, `sqlite`, `sqlserver`, `mongodb`, `cockroachdb`
 
 ---
 
-#### **Model: User**
+#### Model: User
 
 ```prisma
 model User {
@@ -704,8 +602,6 @@ model User {
 }
 ```
 
-**Field breakdown:**
-
 | Field   | Type      | Attributes                      | Description                   |
 | ------- | --------- | ------------------------------- | ----------------------------- |
 | `id`    | `Int`     | `@id @default(autoincrement())` | Primary key, auto-increments  |
@@ -715,7 +611,7 @@ model User {
 
 ---
 
-#### **Model: Post**
+#### Model: Post
 
 ```prisma
 model Post {
@@ -730,11 +626,6 @@ model Post {
 
 **Relation field breakdown:**
 
-```prisma
-author    User    @relation(fields: [authorId], references: [id])
-authorId  Int
-```
-
 - `author` - Navigation property (not a database column)
 - `@relation(fields: [authorId])` - Foreign key column
 - `references: [id]` - Points to `User.id`
@@ -742,7 +633,7 @@ authorId  Int
 
 ---
 
-### 🔗 Relationship Visualization
+### Step 3: Relationship Visualization
 
 ```
 User (1) ──────< (Many) Post
@@ -750,14 +641,11 @@ User (1) ──────< (Many) Post
   id ←─────────────── authorId
 ```
 
-**Relationship type:** One-to-Many
-
-- One user can have many posts
-- Each post belongs to one user
+**Relationship type:** One-to-Many — one user can have many posts, each post belongs to one user.
 
 ---
 
-### 📋 Common Prisma Attributes Reference
+### Step 4: Common Prisma Attributes Reference
 
 | Attribute    | Purpose               | Example                              |
 | ------------ | --------------------- | ------------------------------------ |
@@ -771,9 +659,9 @@ User (1) ──────< (Many) Post
 
 ---
 
-## 6. Create and Apply Your First Migration
+## 🔄 Database Migrations 
 
-### 🔄 Step 6.1: Run Migration Command
+### Step 1: Run Migration Command
 
 ```bash
 npx prisma migrate dev --name init
@@ -786,7 +674,7 @@ npx prisma migrate dev --name init
 
 ---
 
-### 📦 What Happens During Migration?
+### Step 2: What Happens During Migration?
 
 1. **Prisma compares** schema to database
 2. **Generates SQL** migration file
@@ -797,7 +685,7 @@ npx prisma migrate dev --name init
 
 ---
 
-### 📁 Step 6.2: Generated Migration Structure
+### Step 3: Generated Migration Structure
 
 ```
 prisma/
@@ -841,7 +729,7 @@ ALTER TABLE "Post" ADD CONSTRAINT "Post_authorId_fkey"
 
 ---
 
-### 🎯 Step 6.3: Generate Prisma Client
+### Step 4: Generate Prisma Client
 
 ```bash
 npx prisma generate
@@ -867,14 +755,12 @@ src/
 
 ---
 
-### ⚡ Important: Prisma 7.x Changes
+### Step 5: Prisma 7.x — What Changed
 
-**🆕 What's New in Prisma 7.x:**
-
-| Old Approach (Prisma 4-6)    | New Approach (Prisma 7+) |
-| ---------------------------- | ------------------------ |
-| Direct database connection   | Adapter-based connection |
-| Single client initialization | Adapter + Client pattern |
+| Old Approach (Prisma 4–6)    | New Approach (Prisma 7+)  |
+| ---------------------------- | ------------------------- |
+| Direct database connection   | Adapter-based connection  |
+| Single client initialization | Adapter + Client pattern  |
 
 **Why the change?**
 
@@ -885,9 +771,9 @@ src/
 
 ---
 
-## 7. Instantiate Prisma Client
+## 🔌 Prisma Client Setup 
 
-### 🏗️ Step 7.1: Create Prisma Client Wrapper
+### Step 1: Create Prisma Client Wrapper
 
 **File: `./src/lib/prisma.ts`**
 
@@ -906,87 +792,40 @@ export { prisma };
 
 ---
 
-### 📚 Code Explanation
+### Step 2: Code Walkthrough
 
-#### **Import dotenv config**
+**Import dotenv config**
 
 ```typescript
 import "dotenv/config";
 ```
+Loads environment variables from `.env` before using `process.env`.
 
-- Loads environment variables from `.env`
-- Must be imported before using `process.env`
-
----
-
-#### **Import Prisma Adapter**
+**Import Prisma Adapter**
 
 ```typescript
 import { PrismaPg } from "@prisma/adapter-pg";
 ```
+PostgreSQL-specific adapter for Prisma 7.x — handles low-level database connections.
 
-- PostgreSQL-specific adapter for Prisma 7.x
-- Handles low-level database connections
-
----
-
-#### **Import Generated Prisma Client**
+**Import Generated Prisma Client**
 
 ```typescript
 import { PrismaClient } from "../generated/prisma/client";
 ```
+Custom import path as defined in `schema.prisma`. Contains type-safe database methods.
 
-- Custom import path (as defined in `schema.prisma`)
-- Contains type-safe database methods
-
----
-
-#### **Create Connection String**
-
-```typescript
-const connectionString = `${process.env.DATABASE_URL}`;
-```
-
-- Reads from environment variables
-- Format: `postgresql://user:password@host:port/database`
-
----
-
-#### **Initialize Adapter**
+**Initialize Adapter and Client**
 
 ```typescript
 const adapter = new PrismaPg({ connectionString });
-```
-
-- Creates PostgreSQL adapter instance
-- Manages connection pooling
-
----
-
-#### **Create Prisma Client**
-
-```typescript
 const prisma = new PrismaClient({ adapter });
 ```
-
-- Initializes Prisma Client with adapter
-- Ready for database queries
+Creates the adapter for connection pooling, then wires it into the Prisma Client.
 
 ---
 
-#### **Export Singleton**
-
-```typescript
-export { prisma };
-```
-
-- Single instance pattern
-- Prevents multiple connections
-- Import this instance throughout your app
-
----
-
-### 🏛️ Architecture Pattern
+### Step 3: Architecture Overview
 
 ```
 ┌─────────────────────────────────────┐
@@ -1005,7 +844,7 @@ export { prisma };
 
 ---
 
-### ✅ Best Practice: Singleton Pattern
+### Step 4: Singleton Pattern — Best Practice
 
 **❌ Don't do this:**
 
@@ -1032,9 +871,9 @@ import { prisma } from "./lib/prisma"; // Reuses same connection
 
 ---
 
-## 8. Writing First Query
+## ✍️ Writing Database Queries 
 
-### 🧪 Step 8.1: Create Test Script
+### Step 1: Create Test Script
 
 **File: `./src/script.ts`**
 
@@ -1083,9 +922,9 @@ main()
 
 ---
 
-### 📚 Query Breakdown
+### Step 2: Query Breakdown
 
-#### **Create User with Nested Post**
+#### Create User with Nested Post
 
 ```typescript
 const user = await prisma.user.create({
@@ -1093,59 +932,34 @@ const user = await prisma.user.create({
     name: "Alice",
     email: "alice@prisma.io",
     posts: {
-      create: {
-        title: "Hello World",
-        content: "This is my first post!",
-        published: true,
-      },
+      create: { title: "Hello World", content: "This is my first post!", published: true },
     },
   },
-  include: {
-    posts: true,
-  },
+  include: { posts: true },
 });
 ```
 
-**Query components:**
-
-- `prisma.user.create()` - Insert new user record
-- `data: { ... }` - Data to insert
-- `posts: { create: { ... } }` - **Nested write** (creates related post)
-- `include: { posts: true }` - Return created post with user
+- `prisma.user.create()` — Insert new user record
+- `posts: { create: { ... } }` — **Nested write** (creates related post atomically)
+- `include: { posts: true }` — Return created post with user
 
 **Generated SQL (approximate):**
 
 ```sql
 BEGIN;
-
-INSERT INTO "User" (name, email)
-VALUES ('Alice', 'alice@prisma.io')
-RETURNING *;
-
-INSERT INTO "Post" (title, content, published, authorId)
-VALUES ('Hello World', 'This is my first post!', true, 1)
-RETURNING *;
-
+INSERT INTO "User" (name, email) VALUES ('Alice', 'alice@prisma.io') RETURNING *;
+INSERT INTO "Post" (title, content, published, authorId) VALUES ('Hello World', 'This is my first post!', true, 1) RETURNING *;
 COMMIT;
 ```
 
 ---
 
-#### **Fetch All Users with Posts**
+#### Fetch All Users with Posts
 
 ```typescript
 const allUsers = await prisma.user.findMany({
-  include: {
-    posts: true,
-  },
+  include: { posts: true },
 });
-```
-
-**Generated SQL:**
-
-```sql
-SELECT * FROM "User";
-SELECT * FROM "Post" WHERE "authorId" IN (...);
 ```
 
 **Result structure:**
@@ -1171,7 +985,7 @@ SELECT * FROM "Post" WHERE "authorId" IN (...);
 
 ---
 
-### 🔄 Connection Management
+### Step 3: Connection Management
 
 ```typescript
 main()
@@ -1185,58 +999,19 @@ main()
   });
 ```
 
-**Why disconnect?**
-
-- Closes database connections
-- Prevents hanging processes
-- Releases connection pool resources
+Always disconnect to close the connection pool and prevent hanging processes.
 
 ---
 
-### 🚀 Step 8.2: Run Test Script
+### Step 4: Run Test Script
 
 ```bash
 npx tsx ./src/script.ts
 ```
 
-**Expected output:**
-
-```
-Created user: {
-  id: 1,
-  email: 'alice@prisma.io',
-  name: 'Alice',
-  posts: [
-    {
-      id: 1,
-      title: 'Hello World',
-      content: 'This is my first post!',
-      published: true,
-      authorId: 1
-    }
-  ]
-}
-All users: [
-  {
-    "id": 1,
-    "email": "alice@prisma.io",
-    "name": "Alice",
-    "posts": [
-      {
-        "id": 1,
-        "title": "Hello World",
-        "content": "This is my first post!",
-        "published": true,
-        "authorId": 1
-      }
-    ]
-  }
-]
-```
-
 ---
 
-### 📋 Common Prisma Query Operations
+### Step 5: Common Prisma Query Operations
 
 | Operation | Method         | Example                                                                    |
 | --------- | -------------- | -------------------------------------------------------------------------- |
@@ -1249,190 +1024,67 @@ All users: [
 
 ---
 
-## 9. Check Your Created DB via Adminer
+## 🗃️ Database Management 
 
-### 🌐 Step 9.1: Access Adminer
+### Adminer — Web UI
 
-**Open in browser:**
+**Open in browser:** `http://localhost:8080`
 
-```
-http://localhost:8080
-```
+**Login credentials:**
 
----
+| Field    | Value       |
+| -------- | ----------- |
+| System   | PostgreSQL  |
+| Server   | `db`        |
+| Username | `phi_hrms`  |
+| Password | `phiAT1234` |
+| Database | `hrms-db`   |
 
-### 🔐 Step 9.2: Login Credentials
-
-**Use credentials from `.env`:**
-
-| Field    | Value                      |
-| -------- | -------------------------- |
-| System   | PostgreSQL                 |
-| Server   | `db` (Docker service name) |
-| Username | `phi_hrms`                 |
-| Password | `phiAT1234`                |
-| Database | `hrms-db`                  |
-
-**Alternative for localhost connection:**
-
-- Server: `host.docker.internal` (if accessing from outside Docker)
-- Server: `localhost` (if Adminer is on host network)
+**Useful Adminer operations:** browse table data, edit records inline, run custom SQL, export/import data.
 
 ---
 
-### 🔍 Step 9.3: Verify Tables
-
-**You should see:**
-
-- `User` table with columns: `id`, `email`, `name`
-- `Post` table with columns: `id`, `title`, `content`, `published`, `authorId`
-- Foreign key relationship: `Post.authorId` → `User.id`
-
----
-
-### 📊 Step 9.4: Adminer Features
-
-**Useful operations:**
-
-- 📋 Browse table data
-- ✏️ Edit records inline
-- 🔍 Run custom SQL queries
-- 📈 View table structure
-- 🔗 Visualize relationships
-- 📤 Export data (CSV, SQL)
-- 📥 Import data
-
----
-
-### 🎯 Alternative: Prisma Studio
+### Prisma Studio — Alternative GUI
 
 ```bash
 npx prisma studio
 ```
 
-**Opens at:** `http://localhost:5555`
-
-**Advantages over Adminer:**
-
-- Built specifically for Prisma
-- Respects Prisma schema relationships
-- Better TypeScript integration
-- Visual relationship editor
+Opens at `http://localhost:5555`. Built specifically for Prisma — respects schema relationships and provides a visual relationship editor.
 
 ---
 
-## 10. Reset Migration
-
-### ⚠️ Step 10.1: When to Reset Migrations
-
-**Use cases:**
-
-- Development environment only
-- Schema design changes require fresh start
-- Migration history has errors
-- Need to clear test data
-
-**🚨 NEVER use in production!**
-
----
-
-### 🔄 Step 10.2: Run Migration Reset
+### Reset Migrations
 
 ```bash
 npx prisma migrate reset
 ```
 
-**Prompt:**
+**⚠️ Development only — destroys all data.**
 
-```
-Are you sure you want to reset your database? All data will be lost.
-```
-
-**Reply:** `y`
-
----
-
-### 📦 What This Command Does
-
-| Step | Action                                            |
-| ---- | ------------------------------------------------- |
-| 1    | ❌ Drop all tables                                |
-| 2    | 🗑️ Delete all data                                |
-| 3    | 📋 Recreate schema from `schema.prisma`           |
+| Step | Action                                          |
+| ---- | ----------------------------------------------- |
+| 1    | ❌ Drop all tables                              |
+| 2    | 🗑️ Delete all data                              |
+| 3    | 📋 Recreate schema from `schema.prisma`         |
 | 4    | 📁 Keep migration history in `prisma/migrations/` |
-| 5    | ▶️ Reapply all migrations                         |
-| 6    | 🔄 Regenerate Prisma Client                       |
-
-**Result:**
-
-- Fresh database matching schema
-- All migrations re-run from scratch
-- Zero data remaining
+| 5    | ▶️ Reapply all migrations                       |
+| 6    | 🔄 Regenerate Prisma Client                     |
 
 ---
 
-### ✅ Step 10.3: Verify Reset
+### Safe Data Clear — Keep Schema
 
-**Check database:**
-
-```bash
-docker exec -it postgres psql -U phi_hrms -d hrms-db
-```
-
-**In psql:**
-
-```sql
-\dt
-```
-
-**You should see:**
-
-- `User` table (empty)
-- `Post` table (empty)
-- `_prisma_migrations` table (tracking applied migrations)
-
----
-
-### 📋 Migration Commands Reference
-
-| Command          | Purpose                    | Safe for Production? |
-| ---------------- | -------------------------- | -------------------- |
-| `migrate dev`    | Create & apply migration   | ❌ No (dev only)     |
-| `migrate deploy` | Apply pending migrations   | ✅ Yes               |
-| `migrate reset`  | Reset database             | ❌ No (destructive)  |
-| `migrate status` | Check migration status     | ✅ Yes (read-only)   |
-| `migrate diff`   | Compare schema to database | ✅ Yes (read-only)   |
-
----
-
-## 11. Safe Way to Clear Data but Keep Schema
-
-### 🎯 Use Case
-
-**When you need to:**
-
-- Clear business/test data
-- Keep database structure intact
-- Preserve migration history
-- Avoid re-running migrations
-
----
-
-### 🗑️ Step 11.1: SQL Truncate Command
-
-**Generic template:**
+Use `TRUNCATE` when you need to clear data without dropping the schema:
 
 ```sql
 TRUNCATE TABLE
-  "Table1",
-  "Table2",
-  "Table3"
+  "User",
+  "Post"
 RESTART IDENTITY CASCADE;
 ```
 
----
-
-### 📝 Step 11.2: Example for HRMS Schema
+**HRMS example:**
 
 ```sql
 TRUNCATE TABLE
@@ -1459,72 +1111,20 @@ TRUNCATE TABLE
 RESTART IDENTITY CASCADE;
 ```
 
----
+**SQL command breakdown:**
 
-### 📚 SQL Command Breakdown
+- `TRUNCATE TABLE` — Removes all rows, faster than `DELETE`
+- `RESTART IDENTITY` — Resets auto-increment sequences back to 1
+- `CASCADE` — Automatically truncates dependent tables, respects foreign keys
 
-#### **TRUNCATE TABLE**
-
-```sql
-TRUNCATE TABLE "TableName"
-```
-
-- Removes all rows from table
-- Faster than `DELETE FROM`
-- Doesn't log individual row deletions
-
----
-
-#### **RESTART IDENTITY**
-
-```sql
-RESTART IDENTITY
-```
-
-- Resets auto-increment sequences
-- Next inserted record starts from `id = 1`
-- Without this, IDs continue from last value
-
----
-
-#### **CASCADE**
-
-```sql
-CASCADE
-```
-
-- Automatically truncates dependent tables
-- Respects foreign key relationships
-- Prevents referential integrity errors
-
----
-
-### 🔧 Step 11.3: How to Execute
-
-**Option 1: Via psql**
-
-```bash
-docker exec -it postgres psql -U phi_hrms -d hrms-db
-
-# Then paste SQL command
-```
-
-**Option 2: Via Adminer**
-
-1. Open `http://localhost:8080`
-2. Login to database
-3. Click "SQL command"
-4. Paste truncate statement
-5. Execute
-
-**Option 3: Via Script**
+**Via Prisma script:**
 
 ```typescript
 import { prisma } from "./lib/prisma";
 
 async function truncateTables() {
   await prisma.$executeRaw`
-    TRUNCATE TABLE "User", "Post" 
+    TRUNCATE TABLE "User", "Post"
     RESTART IDENTITY CASCADE
   `;
 }
@@ -1534,7 +1134,7 @@ truncateTables();
 
 ---
 
-### ⚖️ TRUNCATE vs DELETE vs DROP
+### TRUNCATE vs DELETE vs DROP
 
 | Operation  | Data       | Structure  | Speed   | Rollback |
 | ---------- | ---------- | ---------- | ------- | -------- |
@@ -1544,115 +1144,21 @@ truncateTables();
 
 ---
 
-## 12. Real-World HRMS Test Example
+### Migration Commands Reference
 
-### 📁 File: `./src/test-hrms.ts`
-
-```typescript
-import "dotenv/config";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "./generated/prisma/client.js";
-
-const connectionString = `${process.env.DATABASE_URL}`;
-const adapter = new PrismaPg({ connectionString });
-const prisma = new PrismaClient({ adapter });
-
-async function main() {
-  const companies = await prisma.company.findMany();
-  console.log("Companies:", companies);
-}
-
-main()
-  .catch((err) => {
-    console.error("Prisma test failed:", err);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
-```
+| Command          | Purpose                    | Safe for Production? |
+| ---------------- | -------------------------- | -------------------- |
+| `migrate dev`    | Create & apply migration   | ❌ No (dev only)     |
+| `migrate deploy` | Apply pending migrations   | ✅ Yes               |
+| `migrate reset`  | Reset database             | ❌ No (destructive)  |
+| `migrate status` | Check migration status     | ✅ Yes (read-only)   |
+| `migrate diff`   | Compare schema to database | ✅ Yes (read-only)   |
 
 ---
 
-### 🚀 Run Test
+## 🐛 Troubleshooting 
 
-```bash
-npx tsx ./src/test-hrms.ts
-```
-
-**Expected output (if no companies exist):**
-
-```
-Companies: []
-```
-
-**This confirms:**
-
-- ✅ Database connection working
-- ✅ Prisma Client generated correctly
-- ✅ Schema applied successfully
-- ✅ Query execution functional
-
----
-
-## 📌 Critical Reminders
-
-### ⚠️ After Any Schema Change
-
-**Always run these two commands:**
-
-```bash
-# 1. Create migration
-npx prisma migrate dev --name describe_your_change
-
-# 2. Regenerate Prisma Client (IMPORTANT!)
-npx prisma generate
-```
-
-**Example with descriptive name:**
-
-```bash
-npx prisma migrate dev --name add_user_role_field
-```
-
----
-
-### 🔄 Why `npx prisma generate` is Critical
-
-| Without Generate             | With Generate                |
-| ---------------------------- | ---------------------------- |
-| ❌ TypeScript types outdated | ✅ Types match schema        |
-| ❌ New fields unavailable    | ✅ New fields accessible     |
-| ❌ IDE autocomplete broken   | ✅ Full IntelliSense support |
-| ❌ Runtime errors possible   | ✅ Compile-time safety       |
-
----
-
-### 🎯 Migration Naming Best Practices
-
-**Good names:**
-
-```bash
-npx prisma migrate dev --name add_email_verification
-npx prisma migrate dev --name create_orders_table
-npx prisma migrate dev --name make_user_email_optional
-```
-
-**Bad names:**
-
-```bash
-npx prisma migrate dev --name update
-npx prisma migrate dev --name fix
-npx prisma migrate dev --name changes
-```
-
----
-
-## Troubleshooting
-
-### 🐛 Common Issues & Solutions
-
-#### **Issue 1: TypeScript can't find Prisma Client**
+### Issue 1: TypeScript can't find Prisma Client
 
 **Error:**
 
@@ -1666,11 +1172,11 @@ Cannot find module '../generated/prisma/client'
 npx prisma generate
 ```
 
-**Root cause:** Prisma Client not generated or outdated
+Root cause: Prisma Client not generated or outdated.
 
 ---
 
-#### **Issue 2: Database connection refused**
+### Issue 2: Database connection refused
 
 **Error:**
 
@@ -1678,23 +1184,18 @@ npx prisma generate
 Can't reach database server at localhost:5432
 ```
 
-**Solutions:**
+**Solution:**
 
 ```bash
-# Check Docker is running
 docker ps
-
-# Restart containers
 docker compose down
 docker compose up -d
-
-# Verify PostgreSQL is accessible
 docker exec -it postgres psql -U phi_hrms -d hrms-db
 ```
 
 ---
 
-#### **Issue 3: Migration fails with "relation already exists"**
+### Issue 3: Migration fails with "relation already exists"
 
 **Error:**
 
@@ -1705,17 +1206,15 @@ relation "User" already exists
 **Solution:**
 
 ```bash
-# Reset database (development only!)
 npx prisma migrate reset
-
-# Or manually drop conflicting table
+# OR manually:
 docker exec -it postgres psql -U phi_hrms -d hrms-db
-DROP TABLE "User" CASCADE;
+# then: DROP TABLE "User" CASCADE;
 ```
 
 ---
 
-#### **Issue 4: Port 5432 already in use**
+### Issue 4: Port 5432 already in use
 
 **Error:**
 
@@ -1731,15 +1230,18 @@ sudo systemctl stop postgresql
 
 # Option 2: Change port in docker-compose.yml
 ports:
-  - "5433:5432"  # Use 5433 on host
+  - "5433:5432"
+```
 
-# Update .env
+Update `.env` accordingly:
+
+```env
 DATABASE_URL="postgresql://phi_hrms:phiAT1234@localhost:5433/hrms-db"
 ```
 
 ---
 
-#### **Issue 5: ESM import errors**
+### Issue 5: ESM import errors
 
 **Error:**
 
@@ -1747,18 +1249,11 @@ DATABASE_URL="postgresql://phi_hrms:phiAT1234@localhost:5433/hrms-db"
 require() of ES Module not supported
 ```
 
-**Solution:**
-Ensure `package.json` has:
-
-```json
-{
-  "type": "module"
-}
-```
+**Solution:** Ensure `package.json` has `"type": "module"`.
 
 ---
 
-#### **Issue 6: `prisma.config.ts` causes TypeScript errors**
+### Issue 6: `prisma.config.ts` causes TypeScript errors
 
 **Error:**
 
@@ -1766,8 +1261,7 @@ Ensure `package.json` has:
 File 'prisma.config.ts' is not under 'rootDir'
 ```
 
-**Solution:**
-Add to `tsconfig.json`:
+**Solution:** Add to `tsconfig.json`:
 
 ```json
 {
@@ -1777,19 +1271,16 @@ Add to `tsconfig.json`:
 
 ---
 
-## Best Practices
+## ✅ Best Practices 
 
-### ✅ Development Workflow
-
-**Standard workflow:**
+### Development Workflow
 
 ```bash
 # 1. Modify schema.prisma
 # 2. Create migration
 npx prisma migrate dev --name your_change
 
-# 3. Prisma Client auto-generates
-# (but run manually if needed)
+# 3. Generate Prisma Client
 npx prisma generate
 
 # 4. Test changes
@@ -1798,19 +1289,17 @@ npm run dev
 
 ---
 
-### 🔒 Security Best Practices
-
-**Environment variables:**
+### Security
 
 ```bash
 # ✅ Good: Use .env file
 DATABASE_URL="postgresql://user:pass@localhost:5432/db"
 
-# ❌ Bad: Hardcode in code
+# ❌ Bad: Hardcode in source
 const url = "postgresql://user:pass@localhost:5432/db"
 ```
 
-**gitignore essentials:**
+**`.gitignore` essentials:**
 
 ```
 .env
@@ -1821,24 +1310,22 @@ dist/
 
 ---
 
-### 🏗️ Project Structure
-
-**Recommended:**
+### Recommended Project Structure
 
 ```
 project-root/
 ├── src/
 │   ├── generated/
-│   │   └── prisma/          # Generated Prisma Client
+│   │   └── prisma/
 │   ├── lib/
-│   │   └── prisma.ts        # Prisma singleton
-│   ├── routes/              # Express routes
-│   ├── controllers/         # Business logic
-│   ├── middleware/          # Express middleware
-│   └── index.ts             # App entry point
+│   │   └── prisma.ts
+│   ├── routes/
+│   ├── controllers/
+│   ├── middleware/
+│   └── index.ts
 ├── prisma/
-│   ├── migrations/          # Migration history
-│   └── schema.prisma        # Database schema
+│   ├── migrations/
+│   └── schema.prisma
 ├── docker-compose.yml
 ├── package.json
 ├── tsconfig.json
@@ -1847,14 +1334,13 @@ project-root/
 
 ---
 
-### 📊 Database Design Tips
+### Database Design Tips
 
-**1. Always use meaningful names:**
+**1. Use meaningful names:**
 
 ```prisma
 // ✅ Good
 model EmployeeProfile { ... }
-
 // ❌ Bad
 model EP { ... }
 ```
@@ -1864,7 +1350,6 @@ model EP { ... }
 ```prisma
 model User {
   email String @unique
-
   @@index([email])
 }
 ```
@@ -1877,13 +1362,12 @@ enum UserRole {
   USER
   GUEST
 }
-
 model User {
   role UserRole @default(USER)
 }
 ```
 
-**4. Add timestamps:**
+**4. Always add timestamps:**
 
 ```prisma
 model User {
@@ -1894,143 +1378,81 @@ model User {
 
 ---
 
-### 🔄 Migration Strategy
+### Migration Strategy
 
-**Development:**
+| Environment | Command                        |
+| ----------- | ------------------------------ |
+| Development | `npx prisma migrate dev`       |
+| Staging     | `npx prisma migrate deploy`    |
+| Production  | `npx prisma migrate deploy`    |
+
+> Never use `migrate dev` in production.
+
+---
+
+## 📋 Quick Reference Commands 
+
+### Docker Commands
 
 ```bash
-npx prisma migrate dev --name descriptive_name
-```
-
-**Production:**
-
-```bash
-# Never use migrate dev!
-npx prisma migrate deploy
-```
-
-**Staging:**
-
-```bash
-# Review migrations first
-npx prisma migrate status
-npx prisma migrate deploy
+docker compose up -d           # Start containers
+docker compose down            # Stop containers
+docker compose logs -f         # View logs
+docker compose restart db      # Restart DB service
+docker exec -it postgres psql -U phi_hrms -d hrms-db  # Access psql
 ```
 
 ---
 
-## Quick Reference Commands
-
-### 📋 Essential Commands Cheatsheet
-
-#### **Docker Commands**
+### Prisma Commands
 
 ```bash
-# Start containers
-docker compose up -d
-
-# Stop containers
-docker compose down
-
-# View logs
-docker compose logs -f
-
-# Access PostgreSQL CLI
-docker exec -it postgres psql -U phi_hrms -d hrms-db
-
-# Restart specific service
-docker compose restart db
+npx prisma init                          # Initialize Prisma
+npx prisma migrate dev --name <name>     # Create migration (dev)
+npx prisma migrate deploy                # Apply migrations (prod)
+npx prisma migrate reset                 # Reset database (dev only!)
+npx prisma migrate status                # Check migration status
+npx prisma generate                      # Generate Prisma Client
+npx prisma studio                        # Open Prisma Studio
+npx prisma format                        # Format schema file
 ```
 
 ---
 
-#### **Prisma Commands**
+### npm Scripts
 
 ```bash
-# Initialize Prisma
-npx prisma init
-
-# Create migration
-npx prisma migrate dev --name migration_name
-
-# Apply migrations (production)
-npx prisma migrate deploy
-
-# Reset database (dev only!)
-npx prisma migrate reset
-
-# Generate Prisma Client
-npx prisma generate
-
-# Open Prisma Studio
-npx prisma studio
-
-# Check migration status
-npx prisma migrate status
-
-# Format schema file
-npx prisma format
+npm run dev    # Run development server
+npm run build  # Build TypeScript
+npm start      # Run production
 ```
 
 ---
 
-#### **npm Scripts**
-
-```bash
-# Run development server
-npm run dev
-
-# Build TypeScript
-npm run build
-
-# Run production
-npm start
-```
-
----
-
-#### **Database Commands (psql)**
+### psql Commands
 
 ```sql
--- List all tables
-\dt
-
--- Describe table structure
-\d "User"
-
--- List databases
-\l
-
--- List schemas
-\dn
-
--- Quit psql
-\q
+\dt            -- List all tables
+\d "User"      -- Describe table structure
+\l             -- List databases
+\dn            -- List schemas
+\q             -- Quit psql
 ```
 
 ---
 
-### 📊 PostgreSQL Query Examples
+### PostgreSQL Query Examples
 
 ```sql
--- Count records
 SELECT COUNT(*) FROM "User";
-
--- View all users
 SELECT * FROM "User";
-
--- Find user by email
 SELECT * FROM "User" WHERE email = 'alice@prisma.io';
 
--- Join users with posts
 SELECT u.name, p.title
 FROM "User" u
 LEFT JOIN "Post" p ON u.id = p."authorId";
 
--- Delete all posts
 DELETE FROM "Post";
-
--- Truncate table
 TRUNCATE TABLE "User" RESTART IDENTITY CASCADE;
 ```
 
@@ -2040,80 +1462,34 @@ TRUNCATE TABLE "User" RESTART IDENTITY CASCADE;
 
 ### What You've Learned
 
-✅ **Project Setup**
+✅ **Project Setup** — Node.js + TypeScript, ES Modules, Express.js
 
-- Initialize Node.js + TypeScript project
-- Configure ES Modules
-- Set up Express.js server
+✅ **Database Infrastructure** — PostgreSQL via Docker, Adminer, environment variables
 
-✅ **Database Infrastructure**
+✅ **Prisma ORM** — Schema design, migrations, Prisma Client generation, type-safe queries
 
-- Deploy PostgreSQL with Docker
-- Configure Adminer for database management
-- Manage environment variables securely
-
-✅ **Prisma ORM**
-
-- Define database schema
-- Create and apply migrations
-- Generate type-safe Prisma Client
-- Write database queries
-
-✅ **Best Practices**
-
-- Singleton pattern for Prisma Client
-- Migration workflow
-- Error handling
-- Development vs production strategies
+✅ **Best Practices** — Singleton pattern, migration workflow, error handling, dev vs prod strategies
 
 ---
 
 ### 📚 Additional Resources
-
-**Official Documentation:**
 
 - [Prisma Docs](https://www.prisma.io/docs)
 - [Express.js Guide](https://expressjs.com)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs)
 - [PostgreSQL Manual](https://www.postgresql.org/docs)
 
-**Community:**
-
-- [Prisma Discord](https://pris.ly/discord)
-- [Stack Overflow - Prisma Tag](https://stackoverflow.com/questions/tagged/prisma)
-
----
-
-### 🔖 Bookmark This Guide
-
-**Keep this document handy for:**
-
-- Setting up new projects
-- Onboarding new developers
-- Quick command references
-- Troubleshooting common issues
-- Reviewing best practices
-
 ---
 
 ## 📝 Document Metadata
 
-**Version:** 1.0.0  
-**Last Updated:** 15-Feb-2026  
-**Compatible With:**
-
-- Node.js 18+
-- Prisma 7.x
-- PostgreSQL 15
-- TypeScript 5.x
-
-**Tested On:**
-
-- macOS, Linux, Windows (WSL2)
-- Docker Desktop, Docker Engine
+**Version:** 1.1.0  
+**Last Updated:** 13-Feb-2026  
+**Compatible With:** Node.js 18+, Prisma 7.x, PostgreSQL 15, TypeScript 5.x  
+**Tested On:** macOS, Linux, Windows (WSL2)
 
 ---
 
-## **Happy Coding! 🚀**
+**Happy Coding! 🚀**
 
-_This document was created with ❤️ for developers, by Anubhaw. Feel free to suggest any improvements/ or connect with me @ [ContactMe](https://www.anubhawdwivedi.com/contact)_
+_This document was created with ❤️ for developers, by Anubhaw. Feel free to suggest improvements or connect @ [ContactMe](https://www.anubhawdwivedi.com/contact)_

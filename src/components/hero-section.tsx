@@ -46,18 +46,18 @@ export function HeroSection() {
     >
       {/* Avatar and Name - Centered */}
       <div className="mb-6 flex flex-col items-center">
-        <div className="relative mb-4">
+        {/* <div className="relative mb-4">
           <div className="from-primary flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r to-blue-600 text-3xl">
             👋
           </div>
           <div className="absolute -top-1 -right-1 h-5 w-5 animate-pulse rounded-full border-2 border-white bg-green-500"></div>
-        </div>
+        </div> */}
 
         <div>
           <h1 className="text-primary mb-2 text-3xl font-bold tracking-tight md:text-5xl">
             Hey, I'm Anubhaw
           </h1>
-          <div className="text-sm text-neutral-500">🌍 Available for work</div>
+          {/* <div className="text-sm text-neutral-500">🌍 Available for work</div> */}
         </div>
       </div>
 
@@ -93,7 +93,7 @@ export function HeroSection() {
 
         <Link
           href="/contact"
-          className="border-primary text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border px-6 py-3 font-medium transition-all duration-200 hover:text-white"
+          className="border-primary-900 text-primary hover:bg-primary flex items-center justify-center gap-2 rounded-xl border px-6 py-3 font-medium transition-all duration-200 hover:text-white"
         >
           <FiMail size={18} />
           Get In Touch

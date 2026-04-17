@@ -1,63 +1,30 @@
+// src/components/CodeBlockEnhancer.tsx
 "use client";
+
 import { useEffect } from "react";
 
 export default function CodeBlockEnhancer() {
   useEffect(() => {
-    const addCopyButtons = () => {
-      const codeBlocks = document.querySelectorAll(
-        "figure[data-rehype-pretty-code-figure] pre",
-      );
+    const blocks = document.querySelectorAll("pre");
 
-      codeBlocks.forEach((pre) => {
-        const figure = pre.parentElement;
-        if (figure && !figure.querySelector(".copy-button")) {
-          const button = document.createElement("button");
+    blocks.forEach((block) => {
+      if (block.querySelector(".copy-btn")) return;
 
-          button.className =
-            "copy-button absolute top-3 right-3 p-2 bg-neutral-700/80 hover:bg-neutral-600 text-neutral-300 hover:text-white rounded-md opacity-0 transition-all duration-200 text-xs flex items-center gap-1 backdrop-blur-sm cursor-pointer hover:cursor-pointer";
-          button.innerHTML = "📋 Copy";
+      const button = document.createElement("button");
+      button.innerText = "Copy";
+      button.className =
+        "copy-btn absolute top-2 right-2 text-xs px-2 py-1 rounded bg-neutral-700 text-white hover:bg-neutral-600";
 
-          button.addEventListener("click", async () => {
-            const code = pre.querySelector("code");
-            if (code) {
-              try {
-                await navigator.clipboard.writeText(code.textContent || "");
-                button.innerHTML = "✓ Copied!";
-                button.classList.add("text-green-400");
-                setTimeout(() => {
-                  button.innerHTML = "📋 Copy";
-                  button.classList.remove("text-green-400");
-                }, 2000);
-              } catch (err) {
-                console.error("Failed to copy:", err);
-              }
-            }
-          });
+      button.onclick = async () => {
+        const code = block.innerText;
+        await navigator.clipboard.writeText(code);
+        button.innerText = "Copied!";
+        setTimeout(() => (button.innerText = "Copy"), 1500);
+      };
 
-          // Ensure figure positioning for absolute button
-          figure.style.position = "relative";
-          figure.appendChild(button);
-
-          // Add hover visibility with Tailwind classes
-          figure.addEventListener("mouseenter", () => {
-            button.classList.remove("opacity-0");
-            button.classList.add("opacity-100");
-          });
-
-          figure.addEventListener("mouseleave", () => {
-            button.classList.remove("opacity-100");
-            button.classList.add("opacity-0");
-          });
-        }
-      });
-    };
-
-    addCopyButtons();
-
-    const observer = new MutationObserver(addCopyButtons);
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    return () => observer.disconnect();
+      block.style.position = "relative";
+      block.appendChild(button);
+    });
   }, []);
 
   return null;

@@ -1,127 +1,21 @@
-// import { getBlogFrontMatterBySlug, getSingleBlog } from "@/app/utils/mdx";
-// import { Container } from "@/components/container";
-// import { redirect } from "next/navigation";
-// import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
-
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { slug: string };
-// }) {
-//   const frontmatter = await getBlogFrontMatterBySlug(params.slug);
-
-//   if (!frontmatter) {
-//     return {
-//       title: "Blog not Found",
-//     };
-//   }
-
-//   return {
-//     title: frontmatter.title + " - Anubhaw Dwivedi",
-//     description: frontmatter.description,
-//   };
-// }
-
-// // export default async function SingleBlogPage({
-// //   params,
-// // }: {
-// //   params: { slug: string };
-// // }) {
-// //   const { slug } = params;
-// //   const blog = await getSingleBlog(slug);
-
-// //   if (!blog) {
-// //     redirect("/blog");
-// //   }
-
-// //   const { content, frontmatter } = blog;
-
-// //   return (
-// //     <div className="flex min-h-screen items-start justify-start">
-// //       <Container className="min-h-screen p-4 md:pt-20 md:pb-10">
-// //         {/* Blog Header */}
-// //         <header className="mb-8">
-// //           <h1 className="text-primary mb-4 text-3xl font-bold md:text-4xl">
-// //             {frontmatter.title}
-// //           </h1>
-// //           {frontmatter.description && (
-// //             <p className="text-secondary mb-4 text-lg">
-// //               {frontmatter.description}
-// //             </p>
-// //           )}
-// //           {frontmatter.date && (
-// //             <time className="text-sm text-neutral-500 dark:text-neutral-400">
-// //               {new Date(frontmatter.date).toLocaleDateString("en-US", {
-// //                 year: "numeric",
-// //                 month: "long",
-// //                 day: "numeric",
-// //               })}
-// //             </time>
-// //           )}
-// //         </header>
-
-// //         {/* Blog Content with Enhanced Styling */}
-// //         <article className="prose prose-lg dark:prose-invert max-w-none">
-// //           {content}
-// //         </article>
-
-// //         {/* Add this line */}
-// //         <CodeBlockEnhancer />
-// //       </Container>
-// //     </div>
-// //   );
-// // }
-
-// export default async function SingleBlogPage({
-//   params,
-// }: {
-//   params: Promise<{ slug: string }>;
-// }) {
-//   const { slug } = await params; // 👈 await here
-//   const blog = await getSingleBlog(slug);
-
-//   if (!blog) {
-//     redirect("/blog");
-//   }
-
-//   const { content, frontmatter } = blog;
-
-//   return (
-//     <div className="flex min-h-screen items-start justify-start">
-//       <Container className="min-h-screen p-4 md:pt-20 md:pb-10">
-//         <header className="mb-8">
-//           <h1 className="text-primary mb-4 text-3xl font-bold md:text-4xl">
-//             {frontmatter.title}
-//           </h1>
-//           {frontmatter.description && (
-//             <p className="text-secondary mb-4 text-lg">
-//               {frontmatter.description}
-//             </p>
-//           )}
-//           {frontmatter.date && (
-//             <time className="text-sm text-neutral-500 dark:text-neutral-400">
-//               {new Date(frontmatter.date).toLocaleDateString("en-US", {
-//                 year: "numeric",
-//                 month: "long",
-//                 day: "numeric",
-//               })}
-//             </time>
-//           )}
-//         </header>
-
-//         <article className="prose prose-lg dark:prose-invert max-w-none">
-//           {content}
-//         </article>
-
-//         <CodeBlockEnhancer />
-//       </Container>
-//     </div>
-//   );
-// }
+// src/app/blog/[slug]/page.tsx
 import { Container } from "@/components/container";
-import { getBlogFrontMatterBySlug, getSingleBlog } from "@/app/utils/mdx";
+import {
+  getBlogFrontMatterBySlug,
+  getBlogSlugs,
+  getSingleBlog,
+} from "@/app/utils/mdx";
 import { redirect } from "next/navigation";
 import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
+import { Toc } from "@/components/toc";
+import SocialFollow from "@/components/SocialFollow";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const slugs = await getBlogSlugs();
+  return slugs.map((slug) => ({ slug }));
+}
 
 // Fix generateMetadata function - params is Promise here too
 export async function generateMetadata({
@@ -156,37 +50,67 @@ export default async function SingleBlogPage({
     redirect("/blog");
   }
 
-  const { content, frontmatter } = blog;
+  const { content, frontmatter, headings } = blog;
 
   return (
     <div className="flex min-h-screen items-start justify-start">
-      <Container className="min-h-screen p-4 md:pt-20 md:pb-10">
-        <header className="mb-8">
-          <h1 className="text-primary mb-4 text-3xl font-bold md:text-4xl">
-            {frontmatter.title}
-          </h1>
-          {frontmatter.description && (
-            <p className="text-secondary mb-4 text-lg">
-              {frontmatter.description}
-            </p>
-          )}
-          {frontmatter.date && (
-            <time className="text-sm text-neutral-500 dark:text-neutral-400">
-              {new Date(frontmatter.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-          )}
-        </header>
+      <Container className="flex gap-10">
+        {/* MAIN CONTENT */}
+        <div className="flex-1 min-w-0">
+          {/* <header className="mb-8">
+            <h1 className="text-primary mb-4 text-3xl font-bold md:text-4xl">
+              {frontmatter.title}
+            </h1>
+            {frontmatter.description && (
+              <p className="text-secondary mb-4 text-lg">
+                {frontmatter.description}
+              </p>
+            )}
+          </header> */}
 
-        <article className="prose prose-lg dark:prose-invert max-w-none">
-          {content}
-        </article>
+          {/* <article className="prose prose-neutral dark:prose-invert max-w-none
+              prose-h1:text-3xl prose-h1:font-bold
+              prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
+              prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-2
+              prose-code:before:content-none prose-code:after:content-none
+            "> */}
+          <article
+            className="
+              prose-p:text-base sm:prose-p:text-lg
+              prose prose-neutral dark:prose-invert max-w-none
 
-        <CodeBlockEnhancer />
+              /* H1 */
+              prose-h1:text-2xl sm:prose-h1:text-3xl md:prose-h1:text-4xl
+              prose-h1:font-bold
+
+              /* H2 */
+              prose-h2:text-xl sm:prose-h2:text-2xl md:prose-h2:text-3xl
+              prose-h2:mt-8 sm:prose-h2:mt-10
+              prose-h2:mb-3 sm:prose-h2:mb-4
+
+              /* H3 */
+              prose-h3:text-lg sm:prose-h3:text-xl md:prose-h3:text-2xl
+              prose-h3:mt-5 sm:prose-h3:mt-6
+              prose-h3:mb-2
+
+              /* code */
+              prose-code:before:content-none
+              prose-code:after:content-none
+            "
+          >
+            {content}
+          </article>
+
+          <CodeBlockEnhancer />
+          <SocialFollow />
+        </div>
+
+        {/* TOC SIDEBAR */}
+        {/* <div className="hidden lg:block"> */}
+        <Toc headings={headings} />
+        {/* </div> */}
       </Container>
+
     </div>
   );
 }
