@@ -3,9 +3,9 @@ import { getAboutMeContent } from "../utils/mdx";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata = {
-  title: "About Anubhaw Dwivedi | Full Stack Developer",
+  title: "About Anubhaw Dwivedi | Software Engineer",
   description:
-    "Learn about Anubhaw Dwivedi (aka Anubhav), a Full Stack Developer with expertise in React.js, Next.js, Node.js, and modern web technologies.",
+    "Learn about Anubhaw Dwivedi (aka Anubhav), a Software Engineer with expertise in React.js, Next.js, Node.js, and modern web technologies.",
   keywords: [
     "Anubhaw Dwivedi",
     "Anubhaw",
