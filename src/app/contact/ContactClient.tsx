@@ -2,18 +2,17 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  FiMail,
   FiPhone,
   FiMapPin,
-  FiLinkedin,
-  FiGithub,
   FiSend,
   FiCheck,
   FiAlertCircle,
 } from "react-icons/fi";
 import { FaXTwitter } from "react-icons/fa6";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 import { Container } from "@/components/container";
+import { resume } from "@/data/aboutMe/resume";
 
 interface ContactForm {
   name: string;
@@ -29,30 +28,42 @@ interface FormStatus {
 
 const contactMethods = [
   {
-    icon: FiMail,
+    icon: SiGmail,
     label: "Email",
-    value: "anubhawdwivedi@gmail.com",
-    href: "mailto:anubhawdwivedi@gmail.com",
+    iconColor: "text-[#EA4335]",
+    iconBg: "bg-[#EA4335]/10",
+    iconHoverBg: "group-hover:bg-[#EA4335]/15",
+    value: resume.contact.email,
+    href: `mailto:${resume.contact.email}`,
     description: "Drop me a mail anytime",
   },
   {
     icon: FaWhatsapp,
     label: "WhatsApp",
-    value: "+91-9456232279",
+    iconColor: "text-[#25D366]",
+    iconBg: "bg-[#25D366]/10",
+    iconHoverBg: "group-hover:bg-[#25D366]/15",
+    value: resume.contact.phone,
     href: "https://wa.me/919456232279?text=Hi%20Anubhaw,%20I%20found%20your%20portfolio%20and%20would%20like%20to%20connect!",
     description: "Let's chat on WhatsApp",
   },
   {
     icon: FiPhone,
     label: "Phone",
-    value: "+91-9456232279",
-    href: "tel:+919456232279",
+    iconColor: "text-[#0EA5E9]",
+    iconBg: "bg-[#0EA5E9]/10",
+    iconHoverBg: "group-hover:bg-[#0EA5E9]/15",
+    value: resume.contact.phone,
+    href: resume.contact.phoneHref,
     description: "Let's have a conversation",
   },
   {
     icon: FiMapPin,
     label: "Location",
-    value: "India",
+    iconColor: "text-[#F97316]",
+    iconBg: "bg-[#F97316]/10",
+    iconHoverBg: "group-hover:bg-[#F97316]/15",
+    value: resume.contact.location,
     href: "#",
     description: "Available for remote work globally",
   },
@@ -60,22 +71,28 @@ const contactMethods = [
 
 const socialLinks = [
   {
-    icon: FiLinkedin,
+    icon: FaLinkedin,
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/anubhawdwd/",
-    color: "hover:text-blue-600",
+    href: resume.contact.linkedin,
+    color: "text-[#0A66C2]",
+    bgColor: "bg-[#0A66C2]/10",
+    hoverBgColor: "hover:bg-[#0A66C2]/15",
   },
   {
-    icon: FiGithub,
+    icon: FaGithub,
     label: "GitHub",
-    href: "https://github.com/anubhawdwd",
-    color: "hover:text-blue-600",
+    href: resume.contact.github,
+    color: "text-[#181717] dark:text-white",
+    bgColor: "bg-neutral-100 dark:bg-white/10",
+    hoverBgColor: "hover:bg-neutral-200 dark:hover:bg-white/15",
   },
   {
     icon: FaXTwitter,
     label: "X",
     href: "https://x.com/anubhawdwd",
-    color: "hover:text-blue-600",
+    color: "text-[#000000] dark:text-white",
+    bgColor: "bg-neutral-100 dark:bg-white/10",
+    hoverBgColor: "hover:bg-neutral-200 dark:hover:bg-white/15",
   },
 ];
 
@@ -189,8 +206,10 @@ export default function ContactClient() {
                   transition={{ duration: 0.3, delay: 0.1 + index * 0.1 }}
                   className="group flex items-start space-x-4 rounded-lg p-4 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800"
                 >
-                  <div className="bg-primary/10 group-hover:bg-primary rounded-lg p-3 transition-colors group-hover:text-white">
-                    <method.icon size={20} />
+                  <div
+                    className={`${method.iconBg} ${method.iconHoverBg} rounded-lg p-3 transition-colors`}
+                  >
+                    <method.icon className={method.iconColor} size={20} />
                   </div>
                   <div>
                     <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">
@@ -203,7 +222,6 @@ export default function ContactClient() {
                   </div>
                 </motion.a>
               ))}
-
             </div>
           </motion.div>
 
@@ -253,7 +271,7 @@ export default function ContactClient() {
                     onChange={handleChange}
                     required
                     className="focus:ring-primary w-full rounded-lg border border-neutral-300 bg-white px-4 py-3 text-neutral-900 transition-colors focus:border-transparent focus:ring-2 dark:border-neutral-600 dark:bg-neutral-800 dark:text-neutral-100"
-                    placeholder="yourEmailid@domain.com"
+                    placeholder="email-id@domain.com"
                   />
                 </div>
               </div>
@@ -302,10 +320,11 @@ export default function ContactClient() {
               <motion.button
                 type="submit"
                 disabled={!isFormValid || status.type === "loading"}
-                className={`flex w-full items-center justify-center space-x-2 rounded-lg px-6 py-3 font-semibold transition-all duration-200 ${isFormValid && status.type !== "loading"
+                className={`flex w-full items-center justify-center space-x-2 rounded-lg px-6 py-3 font-semibold transition-all duration-200 ${
+                  isFormValid && status.type !== "loading"
                     ? "bg-primary hover:bg-primary/90 text-white shadow-lg hover:scale-[1.02]"
                     : "cursor-not-allowed bg-neutral-300 text-neutral-500 dark:bg-neutral-700 dark:text-neutral-400"
-                  }`}
+                }`}
                 whileTap={{ scale: 0.98 }}
               >
                 {status.type === "loading" ? (
@@ -329,10 +348,11 @@ export default function ContactClient() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
-                  className={`mt-4 flex items-start space-x-3 rounded-lg p-4 ${status.type === "success"
+                  className={`mt-4 flex items-start space-x-3 rounded-lg p-4 ${
+                    status.type === "success"
                       ? "border border-green-200 bg-green-50 dark:border-green-800 dark:bg-green-900/20"
                       : "border border-red-200 bg-red-50 dark:border-red-800 dark:bg-red-900/20"
-                    }`}
+                  }`}
                 >
                   {status.type === "success" ? (
                     <FiCheck
@@ -346,10 +366,11 @@ export default function ContactClient() {
                     />
                   )}
                   <p
-                    className={`text-sm ${status.type === "success"
+                    className={`text-sm ${
+                      status.type === "success"
                         ? "text-green-800 dark:text-green-300"
                         : "text-red-800 dark:text-red-300"
-                      }`}
+                    }`}
                   >
                     {status.message}
                   </p>
@@ -362,12 +383,11 @@ export default function ContactClient() {
         {/* Social Links */}
         <div className="flex items-center justify-center">
           <div className="flex flex-col items-center text-center">
-
             <h4 className="mb-4 text-lg font-semibold text-neutral-900 dark:text-neutral-100">
               Follow Me
             </h4>
 
-            <div className="flex space-x-4 justify-center">
+            <div className="flex justify-center space-x-4">
               {socialLinks.map((social, index) => (
                 <motion.a
                   key={social.label}
@@ -377,7 +397,7 @@ export default function ContactClient() {
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
-                  className={`rounded-lg bg-neutral-100 p-3 transition-colors dark:bg-neutral-800 ${social.color} hover:scale-105`}
+                  className={`rounded-lg p-3 transition-colors hover:scale-105 ${social.bgColor} ${social.hoverBgColor} ${social.color}`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -385,7 +405,6 @@ export default function ContactClient() {
                 </motion.a>
               ))}
             </div>
-
           </div>
         </div>
       </Container>

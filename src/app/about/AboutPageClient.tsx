@@ -11,85 +11,9 @@ import {
   FiPhone,
 } from "react-icons/fi";
 import { Container } from "@/components/container";
+import { resume } from "@/data/aboutMe/resume";
 
-type AboutMeData = {
-  frontmatter: {
-    title: string;
-    description?: string;
-  };
-} | null;
-
-const skills = [
-  {
-    label: "Frontend",
-    values: [
-      "React.js",
-      "Next.js",
-      "TypeScript",
-      "Redux",
-      "Tailwind CSS",
-      "Material UI",
-    ],
-  },
-  {
-    label: "Backend",
-    values: ["Node.js", "Express.js", "REST APIs", "Authentication"],
-  },
-  {
-    label: "Data & Tools",
-    values: ["MongoDB", "SQL", "Git", "GitHub", "Postman", "Chrome DevTools"],
-  },
-  {
-    label: "Practices",
-    values: [
-      "Performance Optimization",
-      "Responsive Design",
-      "SEO",
-      "Accessibility",
-      "Code Review",
-    ],
-  },
-];
-
-const experience = [
-  {
-    company: "Phibonacci Solutions",
-    role: "Full Stack Developer",
-    period: "Sep 2024 - Present",
-    points: [
-      "Building and modernizing LMS features with React.js and Node.js/Express.js.",
-      "Implemented secure content delivery flows with authentication and access checks.",
-      "Improved frontend performance with component-level optimizations.",
-      "Refactored a core Quiz API from roughly 2000ms to 210ms response time.",
-    ],
-  },
-  {
-    company: "Freelance Web Developer",
-    role: "Full Stack Developer",
-    period: "Dec 2021 - Aug 2024",
-    points: [
-      "Delivered business websites, dashboards, admin panels, and API integrations.",
-      "Built reusable React/Next.js components and maintainable backend services.",
-      "Improved client organic traffic through SEO, accessibility, and performance work.",
-    ],
-  },
-  {
-    company: "NTT DATA Services",
-    role: "Software Developer",
-    period: "Aug 2019 - Oct 2021",
-    points: [
-      "Built React.js single-page applications for enterprise clients.",
-      "Worked with design and backend teams to deliver responsive, production-ready UI.",
-      "Reduced UI-related production issues through better component logic and reuse.",
-    ],
-  },
-];
-
-export default function AboutPageClient({
-  aboutMeData,
-}: {
-  aboutMeData: AboutMeData;
-}) {
+export default function AboutPageClient() {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
   const handleDownloadResume = async () => {
@@ -130,13 +54,14 @@ export default function AboutPageClient({
             About
           </p> */}
           <h1 className="text-primary text-4xl font-bold tracking-tight md:text-5xl">
-            {aboutMeData?.frontmatter.title || "Anubhaw Dwivedi"}
+            {resume.name}
           </h1>
           <p className="text-secondary mt-5 max-w-3xl text-base leading-7 md:text-lg">
-            Full Stack Developer with 3+ years of experience building modern,
-            responsive, and scalable web applications. I work across React.js,
-            Next.js, Node.js, Express.js, databases, and production workflows to
-            turn product ideas into reliable software.
+            {resume.summary}
+          </p>
+          <p className="mt-3 max-w-3xl text-sm text-neutral-500 dark:text-neutral-400">
+            This is my official portfolio; people sometimes search for my work
+            as Anubhav Dwivedi, Anubhav Divedi, or anubhawdwivedi.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -169,40 +94,40 @@ export default function AboutPageClient({
 
         <section className="grid gap-4 border-b border-neutral-200 py-8 text-sm text-neutral-600 md:grid-cols-2 dark:border-neutral-800 dark:text-neutral-300">
           <a
-            href="mailto:anubhawdwivedi@gmail.com"
+            href={`mailto:${resume.contact.email}`}
             className="flex items-center gap-3 transition-colors hover:text-neutral-950 dark:hover:text-neutral-50"
           >
             <FiMail size={18} />
-            anubhawdwivedi@gmail.com
+            {resume.contact.email}
           </a>
           <a
-            href="tel:+919456232279"
+            href={resume.contact.phoneHref}
             className="flex items-center gap-3 transition-colors hover:text-neutral-950 dark:hover:text-neutral-50"
           >
             <FiPhone size={18} />
-            +91 94562 32279
+            {resume.contact.phone}
           </a>
           <a
-            href="https://github.com/anubhawdwd"
+            href={resume.contact.github}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 transition-colors hover:text-neutral-950 dark:hover:text-neutral-50"
           >
             <FiGithub size={18} />
-            github.com/anubhawdwd
+            {resume.contact.githubLabel}
           </a>
           <a
-            href="https://www.linkedin.com/in/anubhawdwd/"
+            href={resume.contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-3 transition-colors hover:text-neutral-950 dark:hover:text-neutral-50"
           >
             <FiLinkedin size={18} />
-            linkedin.com/in/anubhawdwd
+            {resume.contact.linkedinLabel}
           </a>
           <div className="flex items-center gap-3">
             <FiMapPin size={18} />
-            India
+            {resume.contact.location}
           </div>
         </section>
 
@@ -211,7 +136,7 @@ export default function AboutPageClient({
             Technical Skills
           </h2>
           <div className="grid gap-4 md:grid-cols-2">
-            {skills.map((group) => (
+            {resume.skills.map((group) => (
               <div
                 key={group.label}
                 className="rounded-xl border border-neutral-200 bg-white p-5 dark:border-neutral-800 dark:bg-neutral-900"
@@ -239,7 +164,7 @@ export default function AboutPageClient({
             Professional Experience
           </h2>
           <div className="space-y-5">
-            {experience.map((item) => (
+            {resume.experience.map((item) => (
               <article
                 key={`${item.company}-${item.period}`}
                 className="rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900"
@@ -272,13 +197,13 @@ export default function AboutPageClient({
           <div className="rounded-xl border border-neutral-200 bg-white p-6 dark:border-neutral-800 dark:bg-neutral-900">
             <h2 className="text-primary mb-3 text-xl font-bold">Education</h2>
             <p className="font-medium text-neutral-900 dark:text-neutral-100">
-              Integrated Dual Degree, VLSI Technology
+              {resume.education.degree}
             </p>
             <p className="text-secondary mt-1 text-sm">
-              Gautam Buddha University, Greater Noida
+              {resume.education.school}
             </p>
             <p className="mt-2 text-sm text-neutral-500 dark:text-neutral-400">
-              2014 - 2019
+              {resume.education.period}
             </p>
           </div>
 
@@ -286,11 +211,7 @@ export default function AboutPageClient({
             <h2 className="text-primary mb-3 text-xl font-bold">
               What I Focus On
             </h2>
-            <p className="text-secondary text-sm leading-6">
-              Clean component architecture, practical performance improvements,
-              secure API flows, maintainable code, and user interfaces that stay
-              clear and responsive under real product constraints.
-            </p>
+            <p className="text-secondary text-sm leading-6">{resume.focus}</p>
           </div>
         </section>
       </main>

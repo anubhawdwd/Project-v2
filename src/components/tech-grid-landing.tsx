@@ -1,74 +1,81 @@
 "use client";
 import { motion } from "framer-motion";
+import type { IconType } from "react-icons";
 import { FaReact, FaNodeJs } from "react-icons/fa";
 import {
+  SiFastapi,
   SiNextdotjs,
-  SiTypescript,
   SiMongodb,
-  SiTailwindcss,
-  SiAngular,
-  SiDotnet,
+  SiPostgresql,
+  SiPython,
+  SiTypescript,
 } from "react-icons/si";
+import { resume } from "@/data/aboutMe/resume";
 
-const stack = [
-  {
+type TechDetail = {
+  Icon: IconType;
+  color: string;
+  darkColor?: string;
+  bgColor: string;
+  borderColor: string;
+};
+
+const techDetails: Record<string, TechDetail> = {
+  "React": {
     Icon: FaReact,
-    name: "React.js",
     color: "#61DAFB", // React blue
     bgColor: "bg-blue-50 dark:bg-blue-950/20",
     borderColor: "border-blue-200 dark:border-blue-800",
   },
-  {
+  "Next.js": {
     Icon: SiNextdotjs,
-    name: "Next.js",
     color: "#000000", // Next.js black
     darkColor: "#FFFFFF", // White for dark mode
     bgColor: "bg-gray-50 dark:bg-gray-900/20",
     borderColor: "border-gray-200 dark:border-gray-700",
   },
-  {
+  Python: {
+    Icon: SiPython,
+    color: "#3776AB",
+    bgColor: "bg-yellow-50 dark:bg-yellow-950/20",
+    borderColor: "border-yellow-200 dark:border-yellow-800",
+  },
+  FastAPI: {
+    Icon: SiFastapi,
+    color: "#009688",
+    bgColor: "bg-teal-50 dark:bg-teal-950/20",
+    borderColor: "border-teal-200 dark:border-teal-800",
+  },
+  "Node.js": {
     Icon: FaNodeJs,
-    name: "Node.js",
     color: "#339933", // Node.js green
     bgColor: "bg-green-50 dark:bg-green-950/20",
     borderColor: "border-green-200 dark:border-green-800",
   },
-  {
+  TypeScript: {
     Icon: SiTypescript,
-    name: "TypeScript",
     color: "#3178C6", // TypeScript blue
     bgColor: "bg-blue-50 dark:bg-blue-950/20",
     borderColor: "border-blue-200 dark:border-blue-800",
   },
-  {
+  PostgreSQL: {
+    Icon: SiPostgresql,
+    color: "#4169E1",
+    bgColor: "bg-indigo-50 dark:bg-indigo-950/20",
+    borderColor: "border-indigo-200 dark:border-indigo-800",
+  },
+  MongoDB: {
     Icon: SiMongodb,
-    name: "MongoDB",
     color: "#47A248", // MongoDB green
     bgColor: "bg-green-50 dark:bg-green-950/20",
     borderColor: "border-green-200 dark:border-green-800",
   },
-  {
-    Icon: SiTailwindcss,
-    name: "Tailwind CSS",
-    color: "#06B6D4", // Tailwind cyan
-    bgColor: "bg-cyan-50 dark:bg-cyan-950/20",
-    borderColor: "border-cyan-200 dark:border-cyan-800",
-  },
-  {
-    Icon: SiAngular,
-    name: "Angular",
-    color: "#DD0031", // Angular red
-    bgColor: "bg-red-50 dark:bg-red-950/20",
-    borderColor: "border-red-200 dark:border-red-800",
-  },
-  {
-    Icon: SiDotnet,
-    name: ".NET",
-    color: "#512BD4", // .NET purple
-    bgColor: "bg-purple-50 dark:bg-purple-950/20",
-    borderColor: "border-purple-200 dark:border-purple-800",
-  },
-];
+} as const;
+
+const stack = resume.featuredTechnologies.map((name) => ({
+  name,
+  ...techDetails[name],
+}));
 
 export default function TechGridLanding() {
   return (

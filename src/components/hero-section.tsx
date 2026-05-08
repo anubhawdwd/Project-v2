@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { FiDownload, FiMail, FiGithub, FiLinkedin } from "react-icons/fi";
 import Link from "next/link";
 import { useState } from "react";
+import { resume } from "@/data/aboutMe/resume";
 
 export function HeroSection() {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
@@ -46,27 +47,18 @@ export function HeroSection() {
     >
       {/* Avatar and Name - Centered */}
       <div className="mb-6 flex flex-col items-center">
-        {/* <div className="relative mb-4">
-          <div className="from-primary flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-r to-blue-600 text-3xl">
-            👋
-          </div>
-          <div className="absolute -top-1 -right-1 h-5 w-5 animate-pulse rounded-full border-2 border-white bg-green-500"></div>
-        </div> */}
-
         <div>
           <h1 className="text-primary mb-2 text-3xl font-bold tracking-tight md:text-5xl">
-            Hey, I'm Anubhaw
+            Hey, I'm {resume.displayName}
           </h1>
-          {/* <div className="text-sm text-neutral-500">🌍 Available for work</div> */}
         </div>
       </div>
 
       {/* Description - Centered */}
       <p className="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed">
-        A full-stack developer crafting scalable apps and beautiful UIs.
-        Currently building things at{" "}
+        {resume.heroSummary.replace("Phibonacci Learnings.", "")}
         <span className="font-semibold text-black dark:text-white">
-          Phibonacci Solutions
+          Phibonacci Learnings
         </span>
         . I love turning complex problems into simple, elegant solutions.
       </p>

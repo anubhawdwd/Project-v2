@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
 import { Toc } from "@/components/toc";
 import SocialFollow from "@/components/SocialFollow";
+import { resume, siteUrl } from "@/data/aboutMe/resume";
 
 export const dynamicParams = false;
 
@@ -35,6 +36,16 @@ export async function generateMetadata({
   return {
     title: frontmatter.title + " - Anubhaw Dwivedi",
     description: frontmatter.description,
+    keywords: [...resume.keywords],
+    alternates: {
+      canonical: `${siteUrl}/blog/${resolvedParams.slug}`,
+    },
+    openGraph: {
+      title: `${frontmatter.title} - Anubhaw Dwivedi`,
+      description: frontmatter.description,
+      url: `${siteUrl}/blog/${resolvedParams.slug}`,
+      type: "article",
+    },
   };
 }
 
@@ -56,7 +67,7 @@ export default async function SingleBlogPage({
     <div className="flex min-h-screen items-start justify-start">
       <Container className="flex gap-10">
         {/* MAIN CONTENT */}
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           {/* <header className="mb-8">
             <h1 className="text-primary mb-4 text-3xl font-bold md:text-4xl">
               {frontmatter.title}
@@ -74,30 +85,7 @@ export default async function SingleBlogPage({
               prose-h3:text-xl prose-h3:mt-6 prose-h3:mb-2
               prose-code:before:content-none prose-code:after:content-none
             "> */}
-          <article
-            className="
-              prose-p:text-base sm:prose-p:text-lg
-              prose prose-neutral dark:prose-invert max-w-none
-
-              /* H1 */
-              prose-h1:text-2xl sm:prose-h1:text-3xl md:prose-h1:text-4xl
-              prose-h1:font-bold
-
-              /* H2 */
-              prose-h2:text-xl sm:prose-h2:text-2xl md:prose-h2:text-3xl
-              prose-h2:mt-8 sm:prose-h2:mt-10
-              prose-h2:mb-3 sm:prose-h2:mb-4
-
-              /* H3 */
-              prose-h3:text-lg sm:prose-h3:text-xl md:prose-h3:text-2xl
-              prose-h3:mt-5 sm:prose-h3:mt-6
-              prose-h3:mb-2
-
-              /* code */
-              prose-code:before:content-none
-              prose-code:after:content-none
-            "
-          >
+          <article className="prose-p:text-base sm:prose-p:text-lg prose prose-neutral dark:prose-invert /* H1 */ prose-h1:text-2xl sm:prose-h1:text-3xl md:prose-h1:text-4xl prose-h1:font-bold /* H2 */ prose-h2:text-xl sm:prose-h2:text-2xl md:prose-h2:text-3xl prose-h2:mt-8 sm:prose-h2:mt-10 prose-h2:mb-3 sm:prose-h2:mb-4 /* H3 */ prose-h3:text-lg sm:prose-h3:text-xl md:prose-h3:text-2xl prose-h3:mt-5 sm:prose-h3:mt-6 prose-h3:mb-2 /* code */ prose-code:before:content-none prose-code:after:content-none max-w-none">
             {content}
           </article>
 
@@ -110,7 +98,6 @@ export default async function SingleBlogPage({
         <Toc headings={headings} />
         {/* </div> */}
       </Container>
-
     </div>
   );
 }

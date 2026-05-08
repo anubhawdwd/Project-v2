@@ -1,10 +1,58 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
+import { personJsonLd, resume, siteUrl } from "@/data/aboutMe/resume";
 
 export const metadata: Metadata = {
-  title: "Anubhaw's Portfolio",
-  description: "Anubhaw Dwivedi aka anubhav is a software developer ",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default:
+      "Anubhaw Dwivedi | Python Full Stack Developer & Software Engineer",
+    template: "%s | Anubhaw Dwivedi",
+  },
+  description: resume.summary,
+  keywords: [...resume.keywords],
+  authors: [{ name: resume.name, url: siteUrl }],
+  creator: resume.name,
+  publisher: resume.name,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "profile",
+    locale: "en_IN",
+    url: siteUrl,
+    siteName: "Anubhaw Dwivedi",
+    title: "Anubhaw Dwivedi | Python Full Stack Developer",
+    description: resume.summary,
+    images: [
+      {
+        url: "/avatar.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "Anubhaw Dwivedi",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anubhaw Dwivedi | Python Full Stack Developer",
+    description: resume.summary,
+    images: ["/avatar.jpg"],
+    creator: "@anubhawdwd",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -12,9 +60,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const googleAnalyticsId = "G-Q170KNTHZ7";
+
   return (
     <html lang="en" className="scroll-smooth">
       <body className="bg-neutral-100 font-sans antialiased dark:bg-neutral-700">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${googleAnalyticsId}');
+          `}
+        </Script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Navbar />
         {children}
       </body>

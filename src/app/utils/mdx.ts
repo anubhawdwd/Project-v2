@@ -53,22 +53,22 @@ const rehypePlugins: any[] = [
   rehypeSlug,
   ...(shouldHighlightCode
     ? [
-      [
-        rehypePrettyCode,
-        {
-          theme: "github-dark-dimmed",
-          keepBackground: false,
-          transformers: [
-            {
-              name: "copy-button",
-              code(node: any) {
-                node.properties["data-copy-button"] = true;
+        [
+          rehypePrettyCode,
+          {
+            theme: "github-dark-dimmed",
+            keepBackground: false,
+            transformers: [
+              {
+                name: "copy-button",
+                code(node: any) {
+                  node.properties["data-copy-button"] = true;
+                },
               },
-            },
-          ],
-        },
-      ],
-    ]
+            ],
+          },
+        ],
+      ]
     : []),
 ];
 
@@ -83,7 +83,7 @@ const compileBlog = async (slug: string) => {
       parseFrontmatter: true,
       mdxOptions: {
         remarkPlugins: [
-          remarkGfm, 
+          remarkGfm,
           () => (tree: any, file: any) => {
             const headings: any[] = [];
             const slugger = new GithubSlugger();
@@ -103,24 +103,29 @@ const compileBlog = async (slug: string) => {
               }
             });
 
-            extractedHeadings = headings;  // Store in closure
-          }
+            extractedHeadings = headings; // Store in closure
+          },
         ],
         rehypePlugins: [
           rehypeSlug,
           ...(shouldHighlightCode
-            ? [[rehypePrettyCode, {
-              theme: "github-dark-dimmed",
-              keepBackground: false,
-              transformers: [
-                {
-                  name: "copy-button",
-                  code(node: any) {
-                    node.properties["data-copy-button"] = true;
+            ? ([
+                [
+                  rehypePrettyCode,
+                  {
+                    theme: "github-dark-dimmed",
+                    keepBackground: false,
+                    transformers: [
+                      {
+                        name: "copy-button",
+                        code(node: any) {
+                          node.properties["data-copy-button"] = true;
+                        },
+                      },
+                    ],
                   },
-                },
-              ],
-            }]] as any
+                ],
+              ] as any)
             : []),
         ],
       },
@@ -130,7 +135,7 @@ const compileBlog = async (slug: string) => {
 
   return {
     ...result,
-    headings: extractedHeadings,  // Use the captured headings
+    headings: extractedHeadings, // Use the captured headings
   };
 };
 
@@ -142,8 +147,8 @@ export const getSingleBlog = async (slug: string) => {
     if (!compiledBlogCache.has(slug)) {
       compiledBlogCache.set(slug, compileBlog(slug));
     }
-    const { content, frontmatter, headings } = await compiledBlogCache.get(slug)!;
-    console.log('******', headings);
+    const { content, frontmatter, headings } =
+      await compiledBlogCache.get(slug)!;
     return { content, frontmatter, headings };
   } catch (error) {
     console.error("Error reading blog:", error);
@@ -169,7 +174,6 @@ export const getAllBlogs = async () => {
       return { slug, ...frontmatter };
     }),
   );
-  // console.log(allBlogs);
   return allBlogs;
 };
 

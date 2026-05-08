@@ -67,9 +67,7 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
             My Blog 📝
           </h1>
           <p className="text-secondary mx-auto mb-8 max-w-2xl text-sm md:text-base">
-            Sharing insights about full-stack development, modern web
-            technologies, and lessons learned while building scalable
-            applications. From React.js deep-dives to DevOps adventures.
+            A collection of thoughts, ideas, and experiences from every path I stumble upon during the journey of self-discovery — from software engineering and technology to philosophy, poetry, and life itself.
           </p>
 
           {/* Blog Stats */}

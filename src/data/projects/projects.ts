@@ -6,6 +6,7 @@ export interface Project {
   longDescription: string;
   technologies: string[];
   status: "completed" | "in-progress" | "planned";
+  isLive?: boolean;
   category: "web-app" | "dashboard" | "api" | "mobile" | "other";
   links: {
     live?: string;
@@ -19,26 +20,27 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "HRMS-Platform",
-    title: "Employee Management Platform",
-    subtitle: "Onboarding, Attendance and Leaves",
+    title: "HRMS Platform",
+    subtitle: "Onboarding, Attendance & Leaves",
     description:
-      "Build Employee management platform which enables employers to onboard employees, registering Location based attendance, Leave application and approval, Company Hierarchy",
+      "Enables employers to onboard employees, registering Location based attendance, Leave application and approval, Company Hierarchy",
     longDescription:
       "Build Employee management platform which enables employers to onboard employees, registering Location based attendance that too within defined radius, Leave application and approval, Company Hierarchy. Who is reporting whom can easily be viewed here. Hr can manage employees easily. Frontend was build in react and backend in Express. Used Prisma Orm for PostgreSql Database",
     technologies: [
-      "React.js",
+      "React",
       "TypeScript",
       "Node.js",
       "Express",
-      "Prisma ORM",
+      "Prisma",
       "Postgresql",
       "Docker-Container",
     ],
-    status: "in-progress",
-    category: "web-app",
+    status: "completed",
+    isLive: false,
+    category: "dashboard",
     links: {
       github: "https://github.com/anubhawdwd/hrms-be",
-      demo: "#",
+      // live: "#",
     },
     features: [
       "Real-time collaborative drawing",
@@ -52,8 +54,8 @@ export const projects: Project[] = [
   },
   {
     id: "portfolio-website",
-    title: "Portfolio Website v2",
-    subtitle: "Personal Portfolio & Blog",
+    title: "Portfolio Website ",
+    subtitle: "Portfolio & Blog",
     description:
       "Modern portfolio website built with Next.js, featuring interactive animations and optimized for SEO.",
     longDescription:
@@ -67,6 +69,7 @@ export const projects: Project[] = [
       "Vercel",
     ],
     status: "completed",
+    isLive: true,
     category: "web-app",
     links: {
       live: "https://anubhawdwivedi.com",
@@ -87,7 +90,7 @@ export const projects: Project[] = [
 export const categories = [
   { id: "all", label: "All Projects" },
   { id: "web-app", label: "Web Applications" },
-  // { id: "dashboard", label: "Dashboards" },
+  { id: "dashboard", label: "Dashboards" },
   // { id: "api", label: "APIs" },
-  { id: "other", label: "Other" },
+  // { id: "other", label: "Other" },
 ];

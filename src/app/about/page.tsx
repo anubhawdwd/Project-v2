@@ -1,23 +1,15 @@
-import { Container } from "@/components/container";
-import { getAboutMeContent } from "../utils/mdx";
 import AboutPageClient from "./AboutPageClient";
+import { resume, siteUrl } from "@/data/aboutMe/resume";
 
 export const metadata = {
-  title: "About Anubhaw Dwivedi | Software Engineer",
-  description:
-    "Learn about Anubhaw Dwivedi (aka Anubhav), a Software Engineer with expertise in React.js, Next.js, Node.js, and modern web technologies.",
-  keywords: [
-    "Anubhaw Dwivedi",
-    "Anubhaw",
-    "Anubhav",
-    "Full Stack Developer",
-    "React.js",
-    "Next.js",
-  ],
+  title: `About ${resume.name} | ${resume.role}`,
+  description: resume.summary,
+  keywords: [resume.name, resume.displayName, resume.role, ...resume.keywords],
+  alternates: {
+    canonical: `${siteUrl}/about`,
+  },
 };
 
-export default async function AboutPage() {
-  const aboutMeData = await getAboutMeContent();
-
-  return <AboutPageClient aboutMeData={aboutMeData} />;
+export default function AboutPage() {
+  return <AboutPageClient />;
 }

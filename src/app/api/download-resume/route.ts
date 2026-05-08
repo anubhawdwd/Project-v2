@@ -1,20 +1,81 @@
 import { NextResponse } from "next/server";
-import { getAboutMeContent } from "@/app/utils/mdx";
+import { resume } from "@/data/aboutMe/resume";
+
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+const renderListItems = (items: readonly string[]) =>
+  items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+
+const renderResumeHtml = () => {
+  const contact = resume.contact;
+  const skills = resume.skills
+    .map(
+      (group) =>
+        `<li><strong>${escapeHtml(group.label)}:</strong> ${escapeHtml(
+          group.values.join(", "),
+        )}</li>`,
+    )
+    .join("");
+  const experience = resume.experience
+    .map(
+      (item) => `
+        <h3><strong>${escapeHtml(item.company)}</strong> - ${escapeHtml(
+          item.role,
+        )}</h3>
+        <p><em>${escapeHtml(item.period)}</em></p>
+        <ul>${renderListItems(item.points)}</ul>
+      `,
+    )
+    .join("");
+
+  return `
+    <header class="resume-header">
+      <h1>${escapeHtml(resume.name)}</h1>
+      <p><strong>${escapeHtml(resume.role)}</strong></p>
+      <p>
+        Contact: ${escapeHtml(contact.phone)} |
+        Email: <a href="mailto:${escapeHtml(contact.email)}">${escapeHtml(
+          contact.email,
+        )}</a>
+      </p>
+      <p>
+        <a href="${escapeHtml(contact.portfolio)}">Portfolio</a> |
+        <a href="${escapeHtml(contact.github)}">GitHub</a> |
+        <a href="${escapeHtml(contact.linkedin)}">LinkedIn</a>
+      </p>
+    </header>
+
+    <h2>Summary</h2>
+    <p>${escapeHtml(resume.summary)}</p>
+
+    <h2>Technical Skills</h2>
+    <ul>${skills}</ul>
+
+    <h2>Professional Experience</h2>
+    ${experience}
+
+    <h2>Education</h2>
+    <p><strong>${escapeHtml(resume.education.degree)}</strong></p>
+    <p>${escapeHtml(resume.education.school)}</p>
+    <p>${escapeHtml(resume.education.period)}</p>
+
+    <h2>Languages</h2>
+    <p>${escapeHtml(resume.languages.join(", "))}</p>
+
+    <hr>
+    <p>Keywords: ${escapeHtml(resume.keywords.join(", "))}</p>
+  `;
+};
 
 export async function POST() {
   try {
-    // Get MDX content
-    const aboutMeData = await getAboutMeContent();
-
-    if (!aboutMeData) {
-      throw new Error("Could not load resume content");
-    }
-
-    // Dynamic import of renderToString to avoid bundling issues
-    const { renderToString } = await import("react-dom/server");
-
-    // Convert React component to HTML string
-    const htmlContent = renderToString(aboutMeData.content as any);
+    const htmlContent = renderResumeHtml();
 
     // Professional resume CSS styling
     // Updated CSS with better spacing and formatting
@@ -31,7 +92,6 @@ export async function POST() {
       line-height: 1.4;
       color: #1a1a1a;
       max-width: 90%;
-      // max-width: 8.5in;
       margin: 0 auto;
       padding: 0.5in 0.5in; /* Changed from 0.5in */
       background: white;
@@ -43,7 +103,19 @@ export async function POST() {
       margin-top: 0 !important;
     }
     
-    /* Header - Name and title */
+    .resume-header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .resume-header p {
+      display: block;
+      text-align: center;
+      font-size: 11px;
+      margin-bottom: 3px;
+      line-height: 1.35;
+    }
+
     h1 {
       font-size: 22px; /* Increased from 20px */
       color: #1a1a1a;
@@ -52,18 +124,9 @@ export async function POST() {
       font-weight: 700;
     }
     
-    /* Contact info - compact format */
-    body > p:nth-of-type(1),
-    body > p:nth-of-type(2) {
-      text-align: center;
-      font-size: 11px; /* Increased from 10px */
-      margin-bottom: 3px;
-      line-height: 1.3;
-    }
-    
     /* Section headers */
     h2 {
-      font-size: 14px; /* Increased from 13px */
+      font-size: 14px; 
       color: #1a1a1a;
       margin-top: 16px;
       margin-bottom: 8px;
@@ -80,7 +143,7 @@ export async function POST() {
     
     /* Company/position headers */
     h3 {
-      font-size: 12px; /* Increased from 11px */
+      font-size: 12px; 
       color: #1a1a1a;
       margin-top: 10px;
       margin-bottom: 4px;
@@ -90,7 +153,7 @@ export async function POST() {
     /* Regular paragraphs */
     p {
       margin-bottom: 6px;
-      font-size: 11px; /* Increased from 10px */
+      font-size: 11px;
       line-height: 1.4;
     }
     
@@ -102,7 +165,7 @@ export async function POST() {
     
     li {
       margin-bottom: 2px;
-      font-size: 11px; /* Increased from 10px */
+      font-size: 11px; 
       line-height: 1.3;
     }
     
@@ -116,7 +179,7 @@ export async function POST() {
     em {
       font-style: italic;
       color: #555;
-      font-size: 10px; /* Increased from 9px */
+      font-size: 10px;
     }
     
     /* Links */
@@ -178,7 +241,7 @@ export async function POST() {
       <html lang="en">
         <head>
           <meta charset="utf-8">
-          <title>${aboutMeData.frontmatter.title || "Anubhaw Dwivedi - Resume"}</title>
+          <title>${resume.name} - Resume</title>
           ${resumeStyles}
         </head>
         <body>

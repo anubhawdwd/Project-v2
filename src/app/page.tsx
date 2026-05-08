@@ -1,8 +1,20 @@
+import type { Metadata } from "next";
 import { Container } from "@/components/container";
 import { Landingblogs } from "@/components/landing-blogs";
 import { Projects } from "@/components/projects";
 import { HeroSection } from "@/components/hero-section";
 import TechGridLanding from "@/components/tech-grid-landing";
+import { resume, siteUrl } from "@/data/aboutMe/resume";
+
+export const metadata: Metadata = {
+  title: "Anubhaw Dwivedi | Python Developer, Full Stack Developer",
+  description:
+    "Official portfolio of Anubhaw Dwivedi, also searched as Anubhav Dwivedi, a Python Full Stack Developer and Software Engineer building FastAPI, React, Next.js, and Node.js applications.",
+  keywords: [...resume.keywords],
+  alternates: {
+    canonical: siteUrl,
+  },
+};
 
 export default function Home() {
   return (

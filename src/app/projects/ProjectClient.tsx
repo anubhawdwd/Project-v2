@@ -59,81 +59,101 @@ export default function ProjectsClient() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredProjects.map((project) => (
-          <article
-            key={project.id}
-            className="group flex cursor-pointer flex-col rounded-xl border border-neutral-200 bg-white p-6 shadow-sm transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-neutral-300 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-neutral-600"
-            onClick={() => setSelectedProject(project)}
-          >
-            <div className="mb-4 flex items-start justify-between gap-3">
-              <div>
-                <h3 className="group-hover:text-primary text-lg font-bold text-neutral-900 transition-colors dark:text-neutral-100">
-                  {project.title}
-                </h3>
-                <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-                  {project.subtitle}
-                </p>
-              </div>
-              <span className="shrink-0 text-xs text-neutral-500 dark:text-neutral-400">
-                {project.year}
-              </span>
-            </div>
-
-            <span
-              className={`mb-4 w-fit rounded-full px-2 py-1 text-xs font-medium ${statusColors[project.status]}`}
+        {filteredProjects.map((project) => {
+          const isCompleted = project.status === "completed";
+          const isInProgress = project.status === "in-progress";
+          const isPlanned = project.status === "planned";
+          const isLive = project.isLive;
+          return (
+            <article
+              key={project.id}
+              className="group flex cursor-pointer flex-col rounded-xl border border-neutral-200 bg-white p-6 shadow-sm transition-[border-color,box-shadow,transform] duration-200 hover:-translate-y-1 hover:border-neutral-300 hover:shadow-lg dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-neutral-600"
+              onClick={() => setSelectedProject(project)}
             >
-              {statusLabels[project.status]}
-            </span>
-
-            <p className="mb-4 line-clamp-3 text-sm text-neutral-500 dark:text-neutral-400">
-              {project.description}
-            </p>
-
-            <div className="mb-5 flex flex-wrap gap-1">
-              {project.technologies.slice(0, 4).map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded bg-neutral-100 px-2 py-1 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400"
-                >
-                  {tech}
-                </span>
-              ))}
-              {project.technologies.length > 4 && (
-                <span className="px-2 py-1 text-xs text-neutral-500 dark:text-neutral-500">
-                  +{project.technologies.length - 4} more
-                </span>
-              )}
-            </div>
-
-            <div className="mt-auto flex gap-2">
-              {project.links.live && (
-                <Link
-                  href={project.links.live}
-                  target="_blank"
-                  className="bg-primary hover:bg-primary/90 flex-1 rounded-md px-3 py-2 text-center text-sm font-medium text-white transition-colors"
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  Live Demo
-                </Link>
-              )}
-              {project.links.github && (
-                <Link
-                  href={project.links.github}
-                  target="_blank"
-                  className="flex-1 rounded-md bg-neutral-200 px-3 py-2 text-center text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  GitHub
-                </Link>
-              )}
-              {!project.links.live && !project.links.github && (
-                <div className="flex-1 rounded-md bg-neutral-100 px-3 py-2 text-center text-sm font-medium text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500">
-                  View Details
+              <div className="mb-4 flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="group-hover:text-primary text-lg font-bold text-neutral-900 transition-colors dark:text-neutral-100">
+                    {project.title}
+                  </h3>
+                  <p className="mt-1 text-xs text-neutral-600 dark:text-neutral-300">
+                    <span className="bg-amber-50">{project.subtitle}</span>
+                  </p>
                 </div>
-              )}
-            </div>
-          </article>
-        ))}
+                <span
+                  className={[
+                    "shrink-0 rounded-full px-3 py-1 text-xs font-semibold",
+                    isLive
+                      ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+                      : isCompleted
+                        ? "bg-green-100 text-orange-800 dark:bg-yellow-900/40 dark:text-yellow-300"
+                        : isInProgress
+                          ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                          : "bg-neutral-100 text-neutral-700 dark:bg-neutral-800 dark:text-neutral-300",
+                  ].join(" ")}
+                >
+                  {isLive
+                    ? "Live"
+                    : isCompleted
+                      ? "Completed"
+                      : isInProgress
+                        ? "Building"
+                        : "Planned"}
+                </span>
+              </div>
+
+              <p className="mb-4 line-clamp-4 text-sm text-neutral-500 dark:text-neutral-400">
+                {project.description}
+              </p>
+
+              <div className="mb-5 flex flex-wrap gap-1">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded bg-neutral-100 px-2 py-1 text-xs text-neutral-600 dark:bg-neutral-800 dark:text-neutral-400"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-auto flex gap-2">
+                {project.links.live ? (
+                  <Link
+                    href={project.links.live}
+                    target="_blank"
+                    className="bg-primary flex-1 rounded-md px-3 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-green-800"
+                  >
+                    Live
+                  </Link>
+                ) : (
+                  <button
+                    disabled
+                    className="flex-1 cursor-not-allowed rounded-md bg-neutral-200 px-3 py-2 text-center text-sm font-medium text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500"
+                  >
+                    Not Hosted
+                  </button>
+                )}
+
+                {project.links.github ? (
+                  <Link
+                    href={project.links.github}
+                    target="_blank"
+                    className="flex-1 rounded-md bg-neutral-200 px-3 py-2 text-center text-sm font-medium text-neutral-700 transition-colors hover:bg-neutral-300 dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-600"
+                  >
+                    GitHub
+                  </Link>
+                ) : (
+                  <button
+                    disabled
+                    className="flex-1 cursor-not-allowed rounded-md bg-neutral-200 px-3 py-2 text-center text-sm font-medium text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500"
+                  >
+                    GitHub Unavailable
+                  </button>
+                )}
+              </div>
+            </article>
+          );
+        })}
       </div>
 
       <div className="mt-16 grid grid-cols-2 gap-6 md:grid-cols-4">
@@ -144,8 +164,7 @@ export default function ProjectsClient() {
           },
           {
             label: "Technologies Used",
-            value: [...new Set(projects.flatMap((p) => p.technologies))]
-              .length,
+            value: [...new Set(projects.flatMap((p) => p.technologies))].length,
           },
           { label: "Years Experience", value: "3+" },
           {

@@ -1,21 +1,21 @@
-import { Container } from "@/components/container";
+import type { Metadata } from "next";
 import ProjectsClient from "./ProjectClient";
+import { resume, siteUrl } from "@/data/aboutMe/resume";
 
-// SEO Metadata (works in Server Components)
-export const metadata = {
+export const metadata: Metadata = {
   title: "Projects - Anubhaw Dwivedi | Full Stack Developer",
   description:
-    "Explore projects by Anubhaw Dwivedi (aka Anubhav) - from LMS modernization to collaborative whiteboards. React.js, Next.js, Angular, and more.",
+    "Explore projects by Anubhaw Dwivedi, also searched as Anubhav Dwivedi, including Python, FastAPI, React, Next.js, Node.js, and full stack software engineering work.",
   keywords: [
-    "Anubhaw Dwivedi",
-    "Anubhaw",
-    "Anubhav",
+    ...resume.keywords,
     "Projects",
     "Portfolio",
-    "React.js",
-    "Next.js",
-    "Full Stack Developer",
+    "Python projects",
+    "Full stack projects",
   ],
+  alternates: {
+    canonical: `${siteUrl}/projects`,
+  },
 };
 
 export default function ProjectsPage() {

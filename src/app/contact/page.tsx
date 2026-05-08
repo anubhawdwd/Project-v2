@@ -1,19 +1,20 @@
-import { Container } from "@/components/container";
+import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
+import { resume, siteUrl } from "@/data/aboutMe/resume";
 
-// SEO Metadata
-export const metadata = {
+export const metadata: Metadata = {
   title: "Contact - Anubhaw Dwivedi | Full Stack Developer",
   description:
-    "Get in touch with Anubhaw Dwivedi (aka Anubhav) for collaboration opportunities, freelance projects, or just to say hello. Let's build something amazing together!",
+    "Contact Anubhaw Dwivedi, also searched as Anubhav Dwivedi, for Python, FastAPI, React, Next.js, full stack development, and software engineering opportunities.",
   keywords: [
+    ...resume.keywords,
     "Contact Anubhaw Dwivedi",
-    "Anubhaw",
-    "Anubhav",
     "Hire Full Stack Developer",
-    "React Developer",
-    "Next.js Developer",
+    "Hire Python Developer",
   ],
+  alternates: {
+    canonical: `${siteUrl}/contact`,
+  },
 };
 
 export default function ContactPage() {
