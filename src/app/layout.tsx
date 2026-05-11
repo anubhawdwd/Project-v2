@@ -61,8 +61,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const googleAnalyticsId = "G-Q170KNTHZ7";
-
   return (
     <html lang="en" className="scroll-smooth">
       <head>
@@ -78,16 +76,16 @@ export default function RootLayout({
             gtag('config', '${googleAnalyticsId}');
           `}
         </Script> */}
-        <Script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-        />
       </head>
       <body className="bg-neutral-100 font-sans antialiased dark:bg-neutral-700">
         <Navbar />
         {children}
-      </body>
+        <Script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       <GoogleAnalytics gaId="G-Q170KNTHZ7" />
+      </body>
     </html>
   );
 }
