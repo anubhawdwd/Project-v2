@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { personJsonLd, resume, siteUrl } from "@/data/aboutMe/resume";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -64,8 +65,8 @@ export default function RootLayout({
 
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-neutral-100 font-sans antialiased dark:bg-neutral-700">
-        <Script
+      <head>
+        {/* <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`}
           strategy="afterInteractive"
         />
@@ -76,14 +77,17 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', '${googleAnalyticsId}');
           `}
-        </Script>
-        <script
+        </Script> */}
+        <Script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+      </head>
+      <body className="bg-neutral-100 font-sans antialiased dark:bg-neutral-700">
         <Navbar />
         {children}
       </body>
+      <GoogleAnalytics gaId="G-Q170KNTHZ7" />
     </html>
   );
 }
