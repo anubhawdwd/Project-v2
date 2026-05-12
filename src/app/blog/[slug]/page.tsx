@@ -10,6 +10,7 @@ import CodeBlockEnhancer from "@/components/CodeBlockEnhancer";
 import { Toc } from "@/components/toc";
 import SocialFollow from "@/components/SocialFollow";
 import { resume, siteUrl } from "@/data/aboutMe/resume";
+import { BlogScrollPosition } from "@/components/blog-scroll-position";
 
 export const dynamicParams = false;
 
@@ -65,6 +66,7 @@ export default async function SingleBlogPage({
 
   return (
     <div className="flex min-h-screen items-start justify-start">
+      <BlogScrollPosition slug={slug} />
       <Container className="flex gap-10">
         {/* MAIN CONTENT */}
         <div className="min-w-0 flex-1">

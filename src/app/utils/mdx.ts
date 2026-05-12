@@ -49,6 +49,13 @@ const blogDirectory = path.join(process.cwd(), "src/data/blog");
 const getBlogPath = (slug: string) => path.join(blogDirectory, `${slug}.mdx`);
 const shouldHighlightCode = process.env.NODE_ENV === "production";
 
+const getDateTime = (date?: string) => {
+  if (!date) return 0;
+
+  const time = new Date(date).getTime();
+  return Number.isNaN(time) ? 0 : time;
+};
+
 const rehypePlugins: any[] = [
   rehypeSlug,
   ...(shouldHighlightCode
@@ -174,7 +181,10 @@ export const getAllBlogs = async () => {
       return { slug, ...frontmatter };
     }),
   );
-  return allBlogs;
+
+  return allBlogs.sort((firstBlog, secondBlog) => {
+    return getDateTime(secondBlog.date) - getDateTime(firstBlog.date);
+  });
 };
 
 export const getBlogFrontMatterBySlug = async (slug: string) => {

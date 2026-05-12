@@ -25,6 +25,8 @@ interface BlogPageProps {
   allBlogs: Blog[];
 }
 
+const TAGS_HIDDEN_FROM_ALL_TOPICS = new Set(["Spirituality"]);
+
 export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
@@ -35,6 +37,8 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
     new Set(allBlogs.flatMap((blog) => blog.tags || [])),
   ).filter(Boolean);
 
+  // console.log(allTags)
+
   // Filter blogs based on search and tags
   const filteredBlogs = allBlogs.filter((blog) => {
     const matchesSearch =
@@ -42,7 +46,12 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
       blog.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       blog.description?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesTag = !selectedTag || blog.tags?.includes(selectedTag);
+    const isHiddenFromAllTopics = blog.tags?.some((tag) =>
+      TAGS_HIDDEN_FROM_ALL_TOPICS.has(tag),
+    );
+    const matchesTag = selectedTag
+      ? blog.tags?.includes(selectedTag)
+      : !isHiddenFromAllTopics;
 
     return matchesSearch && matchesTag;
   });
