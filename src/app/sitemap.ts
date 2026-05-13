@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
-import { getBlogSlugs } from "@/app/utils/mdx";
+import { getIndexableBlogSlugs } from "@/app/utils/mdx";
 import { siteUrl } from "@/data/aboutMe/resume";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const blogSlugs = await getBlogSlugs();
+  const blogSlugs = await getIndexableBlogSlugs();
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {

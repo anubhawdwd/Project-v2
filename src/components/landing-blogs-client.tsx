@@ -10,6 +10,7 @@ type Blog = {
   description?: string;
   date?: string;
   tags?: string[];
+  readTime?: number;
 };
 
 export function LandingBlogsClient({ blogs }: { blogs: Blog[] }) {
@@ -27,12 +28,6 @@ export function LandingBlogsClient({ blogs }: { blogs: Blog[] }) {
       month: "short",
       day: "numeric",
     });
-  };
-
-  const getReadTime = (content: string) => {
-    const wordsPerMinute = 200;
-    const words = content?.split(" ").length || 0;
-    return Math.ceil(words / wordsPerMinute) || 2;
   };
 
   return (
@@ -55,7 +50,7 @@ export function LandingBlogsClient({ blogs }: { blogs: Blog[] }) {
                     )}
                     <div className="flex items-center gap-1">
                       <FiBookOpen size={14} />
-                      {getReadTime(blog.description || "")} min read
+                      {blog.readTime || 1} min read
                     </div>
                   </div>
 

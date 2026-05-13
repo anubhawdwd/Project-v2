@@ -19,6 +19,7 @@ type Blog = {
   description?: string;
   date?: string;
   tags?: string[];
+  readTime?: number;
 };
 
 interface BlogPageProps {
@@ -60,12 +61,6 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
     if (!str) return "";
     return str.length > maxLength ? str.slice(0, maxLength) + "..." : str;
   }
-
-  const getReadTime = (content: string) => {
-    const wordsPerMinute = 200;
-    const words = content?.split(" ").length || 0;
-    return Math.ceil(words / wordsPerMinute);
-  };
 
   return (
     <div className="flex min-h-screen items-start justify-start">
@@ -184,7 +179,7 @@ export default function BlogsPageClient({ allBlogs }: BlogPageProps) {
                           )}
                           <div className="flex items-center gap-1">
                             <FiBookOpen size={14} />
-                            {getReadTime(blog.description || "")} min read
+                            {blog.readTime || 1} min read
                           </div>
                         </div>
                         {openingSlug === blog.slug ? (

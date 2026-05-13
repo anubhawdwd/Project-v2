@@ -17,7 +17,14 @@ type FrontMatter = {
   date?: string;
   tags?: string[];
   author?: string[];
+  noindex?: boolean;
 };
+
+type BlogSummary = FrontMatter & {
+  slug: string;
+  readTime: number;
+};
+
 function getText(node: any): string {
   if (node.type === "text") return node.value;
   if (!node.children) return "";
@@ -54,6 +61,13 @@ const getDateTime = (date?: string) => {
 
   const time = new Date(date).getTime();
   return Number.isNaN(time) ? 0 : time;
+};
+
+const calculateReadTime = (content: string) => {
+  const wordsPerMinute = 225;
+  const words = content.match(/[A-Za-z0-9_]+(?:['-][A-Za-z0-9_]+)?/g) ?? [];
+
+  return Math.max(1, Math.ceil(words.length / wordsPerMinute));
 };
 
 const rehypePlugins: any[] = [
@@ -171,14 +185,28 @@ export const getBlogSlugs = async () => {
     .map((file) => file.replace(/\.mdx$/, ""));
 };
 
+export const getIndexableBlogSlugs = async () => {
+  const slugs = await getBlogSlugs();
+  const blogEntries = await Promise.all(
+    slugs.map(async (slug) => {
+      const frontmatter = await getBlogFrontMatterBySlug(slug);
+      return { slug, noindex: frontmatter?.noindex };
+    }),
+  );
+
+  return blogEntries
+    .filter((blog) => !blog.noindex)
+    .map((blog) => blog.slug);
+};
+
 // Keep your other functions as they are
 export const getAllBlogs = async () => {
   const slugs = await getBlogSlugs();
 
   const allBlogs = await Promise.all(
     slugs.map(async (slug) => {
-      const frontmatter = await getBlogFrontMatterBySlug(slug);
-      return { slug, ...frontmatter };
+      const blogMeta = await getBlogMetaBySlug(slug);
+      return { slug, ...blogMeta };
     }),
   );
 
@@ -191,6 +219,22 @@ export const getBlogFrontMatterBySlug = async (slug: string) => {
   try {
     const content = await fs.readFile(getBlogPath(slug), "utf-8");
     return matter(content).data as FrontMatter;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const getBlogMetaBySlug = async (
+  slug: string,
+): Promise<Omit<BlogSummary, "slug"> | null> => {
+  try {
+    const file = await fs.readFile(getBlogPath(slug), "utf-8");
+    const { content, data } = matter(file);
+
+    return {
+      ...(data as FrontMatter),
+      readTime: calculateReadTime(content),
+    };
   } catch (error) {
     return null;
   }

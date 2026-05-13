@@ -38,6 +38,16 @@ export async function generateMetadata({
     title: frontmatter.title + " - Anubhaw Dwivedi",
     description: frontmatter.description,
     keywords: [...resume.keywords],
+    robots: frontmatter.noindex
+      ? {
+          index: false,
+          follow: true,
+          googleBot: {
+            index: false,
+            follow: true,
+          },
+        }
+      : undefined,
     alternates: {
       canonical: `${siteUrl}/blog/${resolvedParams.slug}`,
     },
