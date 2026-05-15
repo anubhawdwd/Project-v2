@@ -47,10 +47,11 @@ export function HeroSection() {
     >
       {/* Avatar and Name - Centered */}
       <div className="mb-6 flex flex-col items-center">
-        <div>
+        <div className="flex items-center ">
           <h1 className="text-primary mb-2 text-3xl font-bold tracking-tight md:text-5xl">
-            Hey, I'm {resume.displayName}
-          </h1>
+            {/* Hey, I'm {resume.displayName}  */}
+            Hey, I'm 
+          </h1> <span className="px-2"><img src="./Signature.png" alt="" className="h-14 w-48" /></span>
         </div>
       </div>
 

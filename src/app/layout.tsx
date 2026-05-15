@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default:
-      "Anubhaw Dwivedi | Python Full Stack Developer & Software Engineer",
+      "Anubhaw Dwivedi | Software Engineer",
     template: "%s | Anubhaw Dwivedi",
   },
   description: resume.summary,
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: "Anubhaw Dwivedi",
-    title: "Anubhaw Dwivedi | Python Full Stack Developer",
+    title: "Anubhaw Dwivedi | Software Developer",
     description: resume.summary,
     images: [
       {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anubhaw Dwivedi | Python Full Stack Developer",
+    title: "Anubhaw Dwivedi | Software Developer",
     description: resume.summary,
     images: ["/avatar.jpg"],
     creator: "@anubhawdwd",

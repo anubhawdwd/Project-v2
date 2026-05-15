@@ -234,3 +234,19 @@ pre:hover .copy-btn {
   }
 }
 
+@keyframes glossyFloat {
+  0%,
+  100% {
+    transform: translateY(-2px);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: translateY(2px);
+    opacity: 1;
+  }
+}
+
+.glossy-shine {
+  animation: glossyFloat 5s ease-in-out infinite;
+}

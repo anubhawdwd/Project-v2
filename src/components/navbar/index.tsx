@@ -40,20 +40,44 @@ export function Navbar() {
           aria-label="Primary"
         >
           <div className="flex h-full min-w-0 items-center justify-between gap-3">
-            <Link
+            {/* <Link
               href="/"
-              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+              className="group flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 p-[2px] shadow-[0_4px_10px_rgba(0,0,0,0.12),inset_0_1px_1px_rgba(255,255,255,0.6)] ring-1 ring-neutral-200 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_10px_20px_rgba(0,0,0,0.18),inset_0_1px_2px_rgba(255,255,255,0.7)] dark:bg-neutral-900 dark:ring-neutral-700"
               aria-label="Go home"
             >
-              <Image
-                src="/avatar.jpg"
-                alt="Anubhaw's Avatar"
-                width={40}
-                height={40}
-                className="h-10 w-10 max-w-none shrink-0 rounded-full object-cover ring-1 ring-neutral-200 transition-transform hover:scale-105 dark:ring-neutral-700"
-                priority
-              />
+              <div className="relative overflow-hidden rounded-full">
+                <Image
+                  src="/logo.png"
+                  alt="Anubhaw's Avatar"
+                  width={40}
+                  height={40}
+                  priority
+                  className="h-10 w-10 max-w-none shrink-0 rounded-full object-cover border border-white/40 transition-all duration-300 group-hover:scale-105 dark:border-neutral-700"
+                />
+
+                <div className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-br from-white/35 via-transparent to-transparent" />
+              </div>
+            </Link> */}
+            <Link
+              href="/"
+              className="group flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-50 p-[2px] shadow-[0_4px_10px_rgba(0,0,0,0.12),inset_0_1px_1px_rgba(255,255,255,0.6)] ring-1 ring-neutral-200 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_10px_20px_rgba(0,0,0,0.18),inset_0_1px_2px_rgba(255,255,255,0.7)] dark:bg-neutral-900 dark:ring-neutral-700 "
+              aria-label="Go home"
+            >
+              <div className="relative overflow-hidden rounded-full">
+                <Image
+                  src="/logo.png"
+                  alt="Anubhaw's Avatar"
+                  width={40}
+                  height={40}
+                  priority
+                  className="h-10 w-10 max-w-none shrink-0 rounded-full object-cover border border-white/40 transition-all duration-300 group-hover:scale-105 dark:border-neutral-700"
+                />
+
+                {/* animated glossy highlight */}
+                <div className="glossy-shine pointer-events-none absolute inset-0 rounded-full bg-gradient-to-br from-slate-400/35 via-red-200/25 to-transparent" />
+              </div>
             </Link>
+
 
             <div className="flex min-w-0 shrink items-center justify-end gap-1 overflow-hidden">
               {NAV_ITEMS.map((item) => {
@@ -100,21 +124,39 @@ export function Navbar() {
           aria-label="Primary"
         >
           <div className="flex h-full min-w-0 items-center justify-between gap-2">
-            <Link
+            {/* <Link
               href="/"
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-slate-50 shadow-aceternity "
               aria-label="Go home"
             >
               <Image
-                src="/avatar.jpg"
+                src="/logo.png"
                 alt="Anubhaw's Avatar"
                 width={32}
                 height={32}
                 className="h-8 w-8 max-w-none shrink-0 rounded-full object-cover ring-1 ring-neutral-200 transition-transform hover:scale-105 dark:ring-neutral-700"
                 priority
               />
-            </Link>
+            </Link> */}
+            <Link
+              href="/"
+              className="group flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-50 p-[2px] shadow-[0_4px_10px_rgba(0,0,0,0.12),inset_0_1px_1px_rgba(255,255,255,0.6)] ring-1 ring-neutral-200 transition-all duration-300 hover:-translate-y-[2px] hover:shadow-[0_10px_20px_rgba(0,0,0,0.18),inset_0_1px_2px_rgba(255,255,255,0.7)] dark:bg-neutral-900 dark:ring-neutral-700 "
+              aria-label="Go home"
+            >
+              <div className="relative overflow-hidden rounded-full">
+                <Image
+                  src="/logo.png"
+                  alt="Anubhaw's Avatar"
+                  width={40}
+                  height={40}
+                  priority
+                  className="h-10 w-10 max-w-none shrink-0 rounded-full object-cover border border-white/40 transition-all duration-300 group-hover:scale-105 dark:border-neutral-700"
+                />
 
+                {/* animated glossy highlight */}
+                <div className="glossy-shine pointer-events-none absolute inset-0 rounded-full bg-gradient-to-br from-slate-400/35 via-red-200/25 to-transparent" />
+              </div>
+            </Link>
             <div className="flex min-w-0 items-center justify-end gap-0.5 ">
               {NAV_ITEMS.map((item) => {
                 const active = pathname === item.href;
