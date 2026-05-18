@@ -3,9 +3,9 @@ import ContactClient from "./ContactClient";
 import { resume, siteUrl } from "@/data/aboutMe/resume";
 
 export const metadata: Metadata = {
-  title: "Contact - Anubhaw Dwivedi | Full Stack Developer",
+  title: "Contact - Anubhaw Dwivedi | Python Backend & Full Stack Software Engineer",
   description:
-    "Contact Anubhaw Dwivedi, also searched as Anubhav Dwivedi, for Python, FastAPI, React, Next.js, full stack development, and software engineering opportunities.",
+    "Contact Anubhaw Dwivedi for Python, FastAPI, Node.js, React, Next.js, backend API, full stack development, and software engineering opportunities.",
   keywords: [
     ...resume.keywords,
     "Contact Anubhaw Dwivedi",

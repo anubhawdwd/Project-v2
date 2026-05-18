@@ -7,9 +7,9 @@ import TechGridLanding from "@/components/tech-grid-landing";
 import { resume, siteUrl } from "@/data/aboutMe/resume";
 
 export const metadata: Metadata = {
-  title: "Anubhaw Dwivedi | Python Developer, Software Engineer",
+  title: "Anubhaw Dwivedi | Python Backend & Full Stack Software Engineer",
   description:
-    "Official portfolio of Anubhaw Dwivedi, also searched as Anubhav Dwivedi or worst Anubhav Divedi, a Python Full Stack Developer and Software Engineer building FastAPI, React, Next.js, and Node.js applications.",
+    "Portfolio of Anubhaw Dwivedi, a Software Engineer building backend systems and full stack applications with Python, FastAPI, Node.js, React, and PostgreSQL.",
   keywords: [...resume.keywords],
   alternates: {
     canonical: siteUrl,

@@ -2,7 +2,7 @@ import AboutPageClient from "./AboutPageClient";
 import { resume, siteUrl } from "@/data/aboutMe/resume";
 
 export const metadata = {
-  title: `About ${resume.name} | ${resume.role}`,
+  title: `About ${resume.name} | Python Backend & Full Stack Software Engineer`,
   description: resume.summary,
   keywords: [resume.name, resume.displayName, resume.role, ...resume.keywords],
   alternates: {

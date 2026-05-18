@@ -4,9 +4,9 @@ import BlogsPageClient from "./BlogsPageClient";
 import { resume, siteUrl } from "@/data/aboutMe/resume";
 
 export const metadata: Metadata = {
-  title: "Blog - Anubhaw Dwivedi | Full Stack Developer",
+  title: "Blog - Anubhaw Dwivedi | Python Backend & Full Stack Software Engineer",
   description:
-    "Read programming notes and web development guides by Anubhaw Dwivedi, also searched as Anubhav Dwivedi, covering Python, backend, React, Next.js, and software engineering.",
+    "Read programming notes and backend engineering guides by Anubhaw Dwivedi, covering Python, FastAPI, PostgreSQL, Node.js, React, and software engineering.",
   keywords: [...resume.keywords, "Programming blog", "Web development blog"],
   alternates: {
     canonical: `${siteUrl}/blog`,

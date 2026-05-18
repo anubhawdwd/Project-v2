@@ -23,9 +23,9 @@ export const projects: Project[] = [
     title: "HRMS Platform",
     subtitle: "Onboarding, Attendance & Leaves",
     description:
-      "Enables employers to onboard employees, registering Location based attendance, Leave application and approval, Company Hierarchy",
+      "A full stack HRMS platform for employee onboarding, location-based attendance, leave workflows, and company hierarchy management.",
     longDescription:
-      "Build Employee management platform which enables employers to onboard employees, registering Location based attendance that too within defined radius, Leave application and approval, Company Hierarchy. Who is reporting whom can easily be viewed here. Hr can manage employees easily. Frontend was build in react and backend in Express. Used Prisma Orm for PostgreSql Database",
+      "Built an employee management platform that helps HR teams onboard employees, track location-based attendance within a defined radius, manage leave applications and approvals, and view company hierarchy. The frontend was built with React and TypeScript, while the backend used Node.js, Express, Prisma, and PostgreSQL.",
     technologies: [
       "React",
       "TypeScript",
@@ -43,12 +43,12 @@ export const projects: Project[] = [
       // live: "#",
     },
     features: [
-      "Real-time collaborative drawing",
-      "Advanced drawing tools and shapes",
-      "Export to multiple formats",
-      "Responsive design for all devices",
-      "Undo/Redo functionality",
-      "Layer management system",
+      "Employee onboarding and profile management",
+      "Location-based attendance within a defined radius",
+      "Leave application and approval workflow",
+      "Company hierarchy and reporting structure",
+      "PostgreSQL data modeling with Prisma ORM",
+      "REST API backend built with Node.js and Express",
     ],
     year: "2026",
   },
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     description:
       "Modern portfolio website built with Next.js, featuring interactive animations and optimized for SEO.",
     longDescription:
-      "Developed a comprehensive personal portfolio website using Next.js 15 with App Router, featuring advanced animations with Framer Motion, interactive components, and a complete blog system. The site is optimized for SEO to rank for multiple name variations and showcases professional work through engaging UI elements.",
+      "Developed a personal portfolio using Next.js 15 with App Router, TypeScript, Tailwind CSS, MDX, and motion-based interactions. The site includes a blog system, SEO metadata, JSON-LD structured data, sitemap generation, responsive UI, and portfolio content focused on Python backend, Node.js, React, and full stack software engineering.",
     technologies: [
       "Next.js",
       "TypeScript",

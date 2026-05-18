@@ -56,12 +56,17 @@ export function HeroSection() {
       </div>
 
       {/* Description - Centered */}
+      <h2 className="text-primary mx-auto mb-4 max-w-3xl text-2xl font-bold tracking-tight md:text-4xl">
+        {resume.role}
+      </h2>
       <p className="text-secondary mx-auto mb-8 max-w-2xl text-lg leading-relaxed">
-        {resume.heroSummary.replace("Phibonacci Learnings.", "")}
+        {resume.heroSummary} I focus on secure APIs, scalable backend
+        workflows, clean architecture, and practical production-ready software.
+        Currently building things at{" "}
         <span className="font-semibold text-black dark:text-white">
           Phibonacci Learnings
         </span>
-        . I love turning complex problems into simple, elegant solutions.
+        .
       </p>
 
       {/* Action Buttons - Centered */}

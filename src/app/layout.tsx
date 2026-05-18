@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default:
-      "Anubhaw Dwivedi | Software Engineer",
+      "Anubhaw Dwivedi | Python Backend & Full Stack Software Engineer",
     template: "%s | Anubhaw Dwivedi",
   },
   description: resume.summary,
@@ -25,8 +25,9 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: "Anubhaw Dwivedi",
-    title: "Anubhaw Dwivedi | Software Developer",
-    description: resume.summary,
+    title: "Anubhaw Dwivedi | Software Engineer",
+    description:
+      "Software Engineer building backend systems and full stack applications with Python, FastAPI, Node.js, React, and PostgreSQL.",
     images: [
       {
         url: "/avatar.jpg",
@@ -38,8 +39,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anubhaw Dwivedi | Software Developer",
-    description: resume.summary,
+    title: "Anubhaw Dwivedi | Software Engineer",
+    description:
+      "Building backend systems and full stack applications with Python, FastAPI, Node.js, React, and PostgreSQL.",
     images: ["/avatar.jpg"],
     creator: "@anubhawdwd",
   },
